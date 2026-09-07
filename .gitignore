@@ -1,0 +1,77 @@
+# Build artifacts
+build/
+devel/
+devel_isolated/
+install/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+.eggs/
+.pytest_cache/
+.tox/
+*.egg
+
+# ROS 2
+*.bag
+*.mcap
+.ros/
+.colcon/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.cproject
+.classpath
+.c9/
+*.sublime-workspace
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Compile_Commands.json
+
+# Large binaries (commit CAD as source, not compiled models)
+*.step
+*.stp
+*.iges
+*.igs
+*.dwg
+*.pdf  # Large PDFs; link to Cloud Drive instead
+
+# Generated documentation
+site/
+_build/
+*.html
+
+# Environment files
+.env
+.env.local
+*.pem
+*.key
+
+# OS
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+.#*
