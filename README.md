@@ -261,58 +261,61 @@ LiDAR, depth cameras, ToF, radar, RTK, and other advanced sensing are not assume
 
 # Operating Model
 
-## GitHub = Engineering Source of Truth
+## GitHub = Complete Engineering Source of Truth
 
-This repository is **not merely code storage**.
+This repository is the project's complete engineering record and primary storage location.
 
-It is the project's operational engineering record and digital thread connecting:
+It contains the documentation, source code, native engineering files, experimental evidence, procurement records, and project history required to reproduce, audit, continue, and defend the project.
 
-`Requirement → Design Decision → Implementation → Test → Evidence → Result`
+Where practical, all project artifacts are stored directly in the repository. Large binary engineering files are tracked using **Git LFS**.
 
-GitHub records:
+Examples include:
 
-- requirements
-- system architecture
-- design decisions
-- engineering tasks
-- procurement
-- BOM changes
-- experiments
-- verification tests
-- failures
-- root-cause analyses
-- engineering changes
-- risks
-- safety decisions
-- supervisor meetings
-- weekly engineering reviews
-- software and firmware history
-
-Every significant engineering claim should ultimately be traceable to evidence.
-
----
-
-## Cloud Drive = Evidence Vault
-
-Large or native engineering artifacts are stored in the project Cloud Drive rather than duplicated in Git.
-
-Examples:
-
-- CAD assemblies
-- SolidWorks files
-- ANSYS projects
+- CAD parts, assemblies, and drawings
+- SolidWorks native files
+- ANSYS models, setups, and relevant results
 - MATLAB/Simulink models
-- ROS bags
-- raw experimental datasets
-- videos
-- high-resolution photographs
+- ROS 2 packages and configuration
+- firmware and embedded software
+- electrical schematics and PCB files
+- BOMs and component records
 - datasheets
+- experimental datasets
+- ROS bags
+- photographs
+- test videos
 - supplier quotations
 - invoices
 - signed documents
-- large simulation outputs
+- supervisor records
+- reports
+- presentations
+- posters
+- simulation inputs and relevant outputs
 
-GitHub records reference these artifacts using permanent **EVD-###** identifiers.
+Every significant engineering artifact should be linked to the appropriate permanent project ID where applicable, such as **REQ-###**, **ADR-###**, **EXP-###**, **TEST-###**, or **EVD-###**.
+
+### Large File Policy
+
+Large binary files that are important to project reproducibility or evidence are stored using **Git LFS**.
+
+Regenerable temporary data should not be committed unnecessarily.
+
+Examples of files that may be excluded include:
+
+- ANSYS temporary/cache directories
+- compiler/build artifacts
+- ROS 2 `build/`, `install/`, and `log/` directories
+- temporary simulation files
+- software caches
+- duplicated exports
+- automatically generated intermediate files
+
+The rule is:
+
+> **Preserve the engineering artifact, evidence, inputs, configurations, and relevant outputs. Exclude only files that can be regenerated without loss of engineering information.**
+
+No external project-storage system is assumed. GitHub is the authoritative project memory.
 
 ---
 
