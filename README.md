@@ -1,9 +1,9 @@
 # Cooperative Autonomous Surface Vessel Swarm for Nile Surface Cleaning
 
-**University of Greenwich Mechatronics Engineering | Final-Year Graduation Project**
+**October University for Modern Science and Arts Mechatronics Engineering | Final-Year Graduation Project**
 
 - **Students:** Aiham, Omar
-- **Repository:** kagetsu2/asv-nile-cleaning-swarm
+- **Repository:** asv-nile-cleaning-swarm
 - **Project GitHub:** Operational source of truth for all engineering decisions, hardware, software, experiments, failures, and project history
 
 ---
