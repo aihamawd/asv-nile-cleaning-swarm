@@ -1,0 +1,13 @@
+requirement_id,title,status,source,design_ids,test_ids,evidence_ids,notes
+REQ-001,Mixed fleet cooperative operation,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-002,Onboard local autonomy independent of shore motor commands,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-003,Mission-level task reassignment,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-004,GNSS/IMU marine autonomous navigation,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-005,Floating-waste collection,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-006,Water-hyacinth cutting and handling,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-007,Experimental environmental disturbance evaluation,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-008,Communication-loss degraded autonomy,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-009,Health energy collection state reporting,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-010,Layered stop and safety mechanisms,Open,docs/requirements/REQ-BASELINE.md,,,,
+REQ-011,Traceable engineering evidence,Active,docs/requirements/REQ-BASELINE.md,,,,Repository governance established
+REQ-012,Evidence-driven design freezes,Active,docs/requirements/REQ-BASELINE.md,,,,
