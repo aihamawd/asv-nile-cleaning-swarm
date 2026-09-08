@@ -22,7 +22,7 @@ Failures are recorded as `FAIL-###`; root-cause work may create `RCA-###`; accep
 
 ## 3. Design authority and boundaries
 
-The current baseline is a mixed fleet of 3–4 physical ASVs: one new-build vessel and 2–3 inherited vessels where restoration/retrofit is technically justified.
+The current baseline is a mixed fleet of 3–4 physical ASVs: one new-build vehicle and 2–3 inherited vehicles where restoration/retrofit is technically justified.
 
 Do not freeze prematurely:
 - final payload/capacity;
@@ -33,7 +33,7 @@ Do not freeze prematurely:
 - fleet allocation algorithm;
 - exact solar contribution.
 
-Fleet coordination is mission-level. Continuous motor control and safety-critical local autonomy remain onboard each vessel.
+Fleet coordination is mission-level. Continuous motor control and safety-critical local autonomy remain onboard each vehicle.
 
 ## 4. Evidence gates
 
@@ -42,9 +42,9 @@ Progression is expected through:
 1. bench validation;
 2. subsystem tests;
 3. controlled float/propulsion tests;
-4. single-vessel autonomous operation;
+4. single-vehicle autonomous operation;
 5. cleaning/hyacinth handling;
-6. multi-vessel communication;
+6. multi-vehicle communication;
 7. cooperative task allocation;
 8. fault/reallocation tests;
 9. representative field validation.

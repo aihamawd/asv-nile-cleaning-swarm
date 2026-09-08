@@ -9,4 +9,4 @@ Recommended organization:
 - `interfaces/` — connector/pin/protocol/interface-control documents.
 - `bom/` — controlled bills of materials and supplier references.
 
-Keep inherited-vessel baseline artifacts distinct from modified revisions so before/after comparisons remain auditable.
+Keep inherited-vehicle baseline artifacts distinct from modified revisions so before/after comparisons remain auditable.

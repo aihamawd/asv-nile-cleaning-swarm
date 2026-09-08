@@ -14,11 +14,11 @@ gantt
     M1 Requirements + legacy characterisation :m1, 2026-08-24, 2026-09-30
     M2 Fleet mechanical readiness             :m2, 2026-09-15, 2026-12-15
     M3 Electrical + propulsion integration    :m3, 2026-09-20, 2027-01-15
-    M4 Single-vessel autonomous navigation    :m4, 2026-10-15, 2027-02-15
+    M4 Single-vehicle autonomous navigation    :m4, 2026-10-15, 2027-02-15
     M5 Cleaning + hyacinth prototype          :m5, 2026-09-20, 2027-02-15
 
     section Grad II — Fleet Integration
-    M6 Multi-vessel communication             :m6, 2027-01-15, 2027-03-15
+    M6 Multi-vehicle communication             :m6, 2027-01-15, 2027-03-15
     M7 Cooperative task allocation            :m7, 2027-02-15, 2027-04-15
     M8 Fault-aware reallocation               :m8, 2027-03-01, 2027-04-30
 
@@ -63,5 +63,5 @@ gantt
 
 - Dates are targets, not substitutes for technical gate evidence.
 - M10 cannot begin field activity without site/safety/permission readiness.
-- Physical fleet quantity may be reduced if a legacy vessel is not technically viable; the decision must be documented rather than hidden.
+- Physical fleet quantity may be reduced if a legacy vehicle is not technically viable; the decision must be documented rather than hidden.
 - A milestone may overlap another when the dependency required for a specific subtask is already satisfied.

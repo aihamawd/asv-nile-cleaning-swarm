@@ -1,78 +1,77 @@
 # GitHub Project Configuration — ASV Swarm for Nile Cleaning
 
-The project should be limited operationally to `kagetsu2/asv-nile-cleaning-swarm`.
+**Operational repository:** `aihamawd/asv-nile-cleaning-swarm`
+**GitHub Project:** `ASV Swarm for Nile Cleaning` — user project #1
 
-## One-time project import
+The Project is an execution view over repository Issues. It must not become a second independent task database.
 
-After setting the Project's **Default repository** to `kagetsu2/asv-nile-cleaning-swarm`, use **Add item → Add from repository / search** and bulk-add:
+## Current hierarchy
 
-```text
-repo:kagetsu2/asv-nile-cleaning-swarm is:issue is:open
-```
+The repository contains **11 milestone/gate parent issues plus 58 engineering sub-issues (69 project items total)**.
 
-The repository currently contains the complete execution hierarchy: **11 milestone/gate parent issues plus 58 engineering sub-issues (69 open issues total)**.
+Parent gates are intentionally unassigned; executable sub-issues carry the actual assignees.
 
-Initial execution state on 8 September 2026:
+## Live fields
 
-- `#14 M1.1` — active now.
-- `#15 M1.2` — active/ready as legacy hardware becomes available.
-- `#16 M1.3` — active/ready as legacy electrical/software assets become available.
-- `#17 M1.4` — next after the relevant audit evidence.
-- `#18 M1.5` — M1 gate closure task.
-- Later milestone tasks remain backlog until their dependencies are satisfied.
+- Title
+- Assignees
+- Status
+- Start date
+- Target date
+- Parent issue
+- Sub-issues progress
+- Labels
+- Linked pull requests
+- Reviewers (built-in where applicable)
 
-## Recommended fields
+Start and Target dates are populated across all 69 project items.
 
-GitHub Project currently exposes `Status` and `Sub-issues progress`. Add these project fields in the UI when available:
+## Live views
 
-| Field | Type | Recommended values/use |
-|---|---|---|
-| Status | Single select | Backlog · Ready · In Progress · Waiting/Blocked · Validation · Done |
-| Workstream | Single select | Mechanical · Electrical/Power · Navigation/Control · Cleaning · ROS 2/Software · Fleet · Validation · Documentation/PM |
-| Owner | Single select | Aiham · Omar · Both |
-| Priority | Single select | P0 Critical · P1 High · P2 Normal · P3 Low |
-| Start | Date | Planned start |
-| Target | Date | Planned completion |
-| Gate | Text/Single select | M1…M11 |
-| Sub-issues progress | Built-in | Parent milestone completion |
+1. **Master Plan** — complete execution table.
+2. **Execution Board** — status board.
+3. **Current Queue** — `status:"In Progress"`.
+4. **Roadmap** — Start/Target timeline.
+5. **Aiham Tasks** — `assignee:aihamawd`.
+6. **Omar Tasks** — `assignee:omaramer13`.
+7. **Milestone Gates** — `no:assignee`.
 
-## Recommended views
+## Assignment policy
 
-1. **Execution Board** — group by Status; filter repository to `kagetsu2/asv-nile-cleaning-swarm`.
-2. **Milestones** — filter titles beginning `M1`…`M11`; show Sub-issues progress.
-3. **Roadmap / Gantt** — use Start and Target fields.
-4. **By Owner** — group by Owner.
-5. **By Workstream** — group by Workstream.
-6. **Validation Queue** — Status = Validation.
-7. **Blocked / Waiting** — Status = Waiting/Blocked.
+GitHub Assignees are authoritative:
 
-## Workflow policy
+- `[Aiham]` → `@aihamawd`
+- `[Omar]` → `@omaramer13`
+- `[Both]` → both while the work is genuinely joint
 
-- New actionable issue: `Backlog`.
-- Accepted for near-term execution: `Ready`.
-- Actively worked: `In Progress`.
-- External dependency, procurement, approval or unresolved blocker: `Waiting/Blocked`.
-- Implementation complete but evidence/gate not yet accepted: `Validation`.
-- Close issue only when acceptance criteria and evidence are satisfied: `Done`.
+The bracketed title marker is a visual planning cue; it does not replace the Assignees field.
 
-## Parent/sub-issue model
+For joint tasks that become predominantly one student's work, establish Primary Owner + Reviewer/Supporting Engineer when the task becomes active so individual contribution remains defensible.
 
-Each `M# — ...` issue is a milestone/gate parent. Engineering work is created as sub-issues so the built-in Sub-issues progress field gives a live completion indicator without duplicating work in a spreadsheet.
+## Status policy
 
-The milestone parent issues are:
+The live Status field currently exposes:
 
-- `#3` M1 — Requirements & Legacy Vessel Characterisation
-- `#4` M2 — Fleet Mechanical Readiness
-- `#5` M3 — Electrical & Propulsion Integration
-- `#6` M4 — Single-Vessel Autonomous Navigation
-- `#7` M5 — Cleaning / Water-Hyacinth Handling Prototype
-- `#8` M6 — Multi-Vessel Communication
-- `#9` M7 — Cooperative Task Allocation
-- `#10` M8 — Fault-Aware Reallocation Behaviour
-- `#11` M9 — Controlled Experimental Validation
-- `#12` M10 — Representative Nile-Environment Validation
-- `#13` M11 — Final Engineering Book, Report, Poster & Viva
+`Todo · In Progress · Done`
 
-## Project limitation
+Preferred mature workflow when the Project field can be safely extended:
 
-Repository issues, sub-issues, commits and planning files are authoritative. GitHub Projects-v2 UI fields/views are presentation and execution surfaces; they must not become a second independent task database.
+`Todo → Ready → In Progress → Blocked / Testing / Review → Done`
+
+Until the live field is extended, do not create duplicate status labels or a second status spreadsheet. Use the Issue/PR evidence and comments to explain a temporary blocker/test/review state while keeping the Project field authoritative.
+
+## Initial execution state — 8 September 2026
+
+- `#14 M1.1 [Both]` — In Progress — Aiham + Omar.
+- `#15 M1.2 [Omar]` — In Progress — Omar.
+- `#16 M1.3 [Aiham]` — In Progress — Aiham.
+- `#17 M1.4` — next after relevant audit evidence.
+- `#18 M1.5` — M1 gate-closure task.
+
+## Project/PR integration
+
+Visible views include **Linked pull requests** so an active engineering task can be traced directly to the reviewed repository change. Meaningful changes should use a feature/fix branch and PR under the protected `main` policy.
+
+## Roadmap rule
+
+GitHub Project Start/Target fields own the operational schedule. `project-data/gantt.csv` and rendered Gantt output are reporting/generated representations and must not diverge into a separate schedule.

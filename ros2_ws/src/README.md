@@ -2,4 +2,4 @@
 
 Place project-owned ROS 2 packages here. Do not commit generated `build/`, `install/`, or `log/` directories.
 
-Package boundaries should follow `SYS-001` and favor reusable common interfaces across new-build and legacy vessels.
+Package boundaries should follow `SYS-001` and favor reusable common interfaces across new-build and legacy vehicles.

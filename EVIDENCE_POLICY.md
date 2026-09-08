@@ -2,6 +2,15 @@
 
 Engineering claims in this project must be supportable by traceable evidence.
 
+
+## Storage roles
+
+- **GitHub** stores the authoritative engineering metadata, source, configuration, traceability records and small reproducibility artifacts.
+- **Cloud Drive** is the evidence vault for large/raw binaries such as native CAD, video, photos, invoices, quotations, ROS bags, large datasets and signed/formal files.
+- **Git LFS** is reserved for version-coupled engineering binaries that genuinely benefit from repository versioning; it is not the default evidence vault.
+
+Every material external evidence artifact should be indexed by an `EVD-###` row in `project-data/evidence-index.csv` and linked back to the source engineering record. See [`docs/project-management/EVIDENCE_VAULT.md`](docs/project-management/EVIDENCE_VAULT.md).
+
 ## Evidence classes
 
 Evidence may include:
