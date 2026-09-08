@@ -1,0 +1,33 @@
+name: Verification test
+about: Verify a requirement or subsystem against acceptance criteria
+title: "TEST-___ — "
+body:
+  - type: input
+    id: requirement
+    attributes:
+      label: Requirement / target ID
+    validations:
+      required: true
+  - type: textarea
+    id: procedure
+    attributes:
+      label: Test procedure and conditions
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options: [Not run, PASS, FAIL, INCONCLUSIVE]
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / logs / EVD IDs

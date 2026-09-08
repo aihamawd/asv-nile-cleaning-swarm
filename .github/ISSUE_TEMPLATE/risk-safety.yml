@@ -1,0 +1,26 @@
+name: Risk / safety
+about: Record and control an engineering or operational risk
+title: "RISK-___ — "
+body:
+  - type: textarea
+    id: hazard
+    attributes:
+      label: Hazard / risk scenario
+    validations:
+      required: true
+  - type: textarea
+    id: consequence
+    attributes:
+      label: Consequence and affected subsystem/person/environment
+    validations:
+      required: true
+  - type: textarea
+    id: controls
+    attributes:
+      label: Existing / required controls
+    validations:
+      required: true
+  - type: textarea
+    id: residual
+    attributes:
+      label: Residual risk and verification

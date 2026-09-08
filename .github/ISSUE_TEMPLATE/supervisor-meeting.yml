@@ -1,0 +1,24 @@
+name: Supervisor meeting
+about: Record decisions and actions from a supervisor meeting
+title: "MIN-___ — Supervisor meeting — YYYY-MM-DD"
+body:
+  - type: textarea
+    id: attendees
+    attributes:
+      label: Attendees
+  - type: textarea
+    id: reviewed
+    attributes:
+      label: Evidence / work reviewed
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Decisions / approvals / constraints
+    validations:
+      required: true
+  - type: textarea
+    id: actions
+    attributes:
+      label: Actions, owner and target date
+    validations:
+      required: true

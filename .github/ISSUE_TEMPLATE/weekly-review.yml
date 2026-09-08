@@ -1,0 +1,24 @@
+name: Weekly review
+about: Lightweight weekly engineering review
+ title: "WEEK-___ — YYYY-MM-DD"
+body:
+  - type: textarea
+    id: done
+    attributes:
+      label: Engineering completed / evidence produced
+    validations:
+      required: true
+  - type: textarea
+    id: failed
+    attributes:
+      label: Failures / blockers / assumptions changed
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Decisions / changes
+  - type: textarea
+    id: next
+    attributes:
+      label: Next authorised work
+    validations:
+      required: true

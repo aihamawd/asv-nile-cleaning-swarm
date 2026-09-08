@@ -1,0 +1,27 @@
+name: Requirement
+about: Create or revise a traceable engineering requirement
+title: "REQ-___ — "
+body:
+  - type: textarea
+    id: requirement
+    attributes:
+      label: Requirement
+      description: State one clear, testable requirement.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale / source
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification method and acceptance criterion
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: Related design / experiment / evidence IDs

@@ -1,0 +1,28 @@
+name: Purchase
+about: Record a technically justified project purchase
+title: "PUR-___ — "
+body:
+  - type: textarea
+    id: item
+    attributes:
+      label: Item / specification / quantity
+    validations:
+      required: true
+  - type: textarea
+    id: basis
+    attributes:
+      label: Requirement / calculation / design basis
+    validations:
+      required: true
+  - type: textarea
+    id: suppliers
+    attributes:
+      label: Local supplier / quotation / alternatives
+  - type: input
+    id: cost
+    attributes:
+      label: Expected cost (EGP)
+  - type: textarea
+    id: approval
+    attributes:
+      label: Approval / budget impact

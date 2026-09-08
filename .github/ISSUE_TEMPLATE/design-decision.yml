@@ -1,0 +1,26 @@
+name: Design decision
+about: Record an evidence-backed architecture or design decision
+title: "ADR-___ — "
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Decision context
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options considered
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decision and evidence
+    validations:
+      required: true
+  - type: textarea
+    id: consequences
+    attributes:
+      label: Consequences / assumptions / revisit trigger

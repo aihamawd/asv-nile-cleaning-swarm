@@ -1,0 +1,30 @@
+name: Experiment
+about: Plan and record a controlled engineering experiment
+title: "EXP-___ — "
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Engineering question / hypothesis
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Method, variables and test conditions
+    validations:
+      required: true
+  - type: textarea
+    id: instrumentation
+    attributes:
+      label: Instrumentation / calibration
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Metrics / acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Raw evidence / EVD links

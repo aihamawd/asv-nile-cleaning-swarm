@@ -1,0 +1,26 @@
+name: Root-cause analysis
+about: Investigate a failure and establish evidence-backed root cause
+ title: "RCA-___ — "
+body:
+  - type: input
+    id: failure
+    attributes:
+      label: Related FAIL ID / issue
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence reviewed
+    validations:
+      required: true
+  - type: textarea
+    id: cause
+    attributes:
+      label: Root cause / competing hypotheses
+    validations:
+      required: true
+  - type: textarea
+    id: corrective
+    attributes:
+      label: Corrective action and verification plan

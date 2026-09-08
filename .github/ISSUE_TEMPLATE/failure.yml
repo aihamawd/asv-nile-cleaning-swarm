@@ -1,0 +1,28 @@
+name: Failure
+about: Record an observed engineering failure without hiding negative evidence
+title: "FAIL-___ — "
+body:
+  - type: textarea
+    id: observation
+    attributes:
+      label: Observed failure
+    validations:
+      required: true
+  - type: textarea
+    id: conditions
+    attributes:
+      label: Conditions / configuration
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Raw evidence
+  - type: textarea
+    id: containment
+    attributes:
+      label: Immediate containment / safety action
+  - type: textarea
+    id: next
+    attributes:
+      label: RCA / retest / change follow-up
