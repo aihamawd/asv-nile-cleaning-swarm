@@ -1,5 +1,5 @@
 name: Verification test
-about: Verify a requirement or subsystem against acceptance criteria
+description: Verify a requirement or subsystem against acceptance criteria
 title: "TEST-___ — "
 body:
   - type: input

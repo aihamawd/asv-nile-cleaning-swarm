@@ -177,6 +177,8 @@ Both students jointly own:
 
 ## Engineering Operating Model
 
+The current operating system is defined in [`docs/project-management/OPERATING_ARCHITECTURE.md`](docs/project-management/OPERATING_ARCHITECTURE.md). It keeps GitHub as the operational source of truth, Cloud Drive as the heavy/raw evidence vault, and AI/MCP as the administrative layer.
+
 ### GitHub = Engineering Source of Truth
 
 This repository is the project's authoritative engineering record and primary storage location. It is intended to preserve the documentation, source code, native engineering files, experimental evidence, procurement records, and project history required to reproduce, audit, continue, and defend the project.

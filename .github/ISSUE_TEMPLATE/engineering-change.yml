@@ -1,5 +1,5 @@
 name: Engineering change
-about: Control a material engineering change after baseline/design freeze
+description: Control a material engineering change after baseline/design freeze
 title: "CHG-___ — "
 body:
   - type: textarea

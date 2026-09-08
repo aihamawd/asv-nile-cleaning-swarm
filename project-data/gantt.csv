@@ -1,10 +1,10 @@
 id,title,start,target,primary,depends_on
-M1,Requirements & Legacy Vessel Characterisation,2026-08-24,2026-09-30,Both,
+M1,Requirements & Legacy Vehicle Characterisation,2026-08-24,2026-09-30,Both,
 M2,Fleet Mechanical Readiness,2026-09-15,2026-12-15,Omar,M1
 M3,Electrical & Propulsion Integration,2026-09-20,2027-01-15,Aiham,M1
-M4,Single-Vessel Autonomous Navigation,2026-10-15,2027-02-15,Aiham,M1;M3
+M4,Single-Vehicle Autonomous Navigation,2026-10-15,2027-02-15,Aiham,M1;M3
 M5,Cleaning / Water-Hyacinth Handling Prototype,2026-09-20,2027-02-15,Omar,M1;M2;M3
-M6,Multi-Vessel Communication,2027-01-15,2027-03-15,Both,M4
+M6,Multi-Vehicle Communication,2027-01-15,2027-03-15,Both,M4
 M7,Cooperative Task Allocation,2027-02-15,2027-04-15,Both,M6
 M8,Fault-Aware Reallocation Behaviour,2027-03-01,2027-04-30,Both,M6;M7
 M9,Controlled Experimental Validation,2027-04-01,2027-05-20,Both,M2;M3;M4;M5;M7;M8

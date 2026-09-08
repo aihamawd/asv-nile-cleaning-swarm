@@ -1,28 +1,65 @@
 name: Failure
-about: Record an observed engineering failure without hiding negative evidence
+description: Record an observed engineering failure without hiding negative evidence
 title: "FAIL-___ — "
 body:
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: input
+    id: component
+    attributes:
+      label: Component / subsystem
+    validations:
+      required: true
   - type: textarea
     id: observation
     attributes:
-      label: Observed failure
+      label: Symptom / observed failure
     validations:
       required: true
   - type: textarea
     id: conditions
     attributes:
-      label: Conditions / configuration
+      label: Operating condition / configuration
     validations:
       required: true
+  - type: input
+    id: related_test
+    attributes:
+      label: Related EXP / TEST / task
+  - type: input
+    id: family
+    attributes:
+      label: Failure family / previous occurrence
+      description: State whether this appears recurrent and link prior FAIL IDs.
   - type: textarea
     id: evidence
     attributes:
-      label: Raw evidence
+      label: Raw evidence / EVD links
+    validations:
+      required: true
   - type: textarea
     id: containment
     attributes:
       label: Immediate containment / safety action
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Cost / schedule / safety impact
+  - type: dropdown
+    id: rca_status
+    attributes:
+      label: Root-cause status
+      options: [Not assessed, RCA required, RCA in progress, Root cause established, RCA not required]
+    validations:
+      required: true
   - type: textarea
     id: next
     attributes:
-      label: RCA / retest / change follow-up
+      label: Corrective action / CHG / retest follow-up

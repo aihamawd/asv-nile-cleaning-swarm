@@ -1,5 +1,5 @@
 name: Requirement
-about: Create or revise a traceable engineering requirement
+description: Create or revise a traceable engineering requirement
 title: "REQ-___ — "
 body:
   - type: textarea

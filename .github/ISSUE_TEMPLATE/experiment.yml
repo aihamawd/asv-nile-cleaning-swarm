@@ -1,17 +1,35 @@
 name: Experiment
-about: Plan and record a controlled engineering experiment
+description: Plan and record a controlled engineering experiment
 title: "EXP-___ — "
 body:
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      placeholder: YYYY-MM-DD
   - type: textarea
     id: question
     attributes:
-      label: Engineering question / hypothesis
+      label: Objective / engineering question / hypothesis
+    validations:
+      required: true
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Vehicle / configuration / hardware revision / software commit
+      description: Identify the tested ASV/configuration precisely enough to reproduce the trial.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Test environment and operating conditions
     validations:
       required: true
   - type: textarea
     id: method
     attributes:
-      label: Method, variables and test conditions
+      label: Procedure / variables / trials
     validations:
       required: true
   - type: textarea
@@ -19,12 +37,24 @@ body:
     attributes:
       label: Instrumentation / calibration
   - type: textarea
-    id: acceptance
+    id: metrics
     attributes:
-      label: Metrics / acceptance criteria
+      label: Measured variables / metrics / acceptance thresholds
     validations:
       required: true
   - type: textarea
-    id: evidence
+    id: raw_data
     attributes:
-      label: Raw evidence / EVD links
+      label: Raw data / video / photo / ROS bag location
+      description: Link EVD ID(s) and Cloud Drive/repository location.
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options: [Not run, PASS, PARTIAL PASS, FAIL, INCONCLUSIVE]
+    validations:
+      required: true
+  - type: textarea
+    id: conclusion
+    attributes:
+      label: Conclusion / related issues / next action

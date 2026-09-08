@@ -1,5 +1,5 @@
 name: Risk / safety
-about: Record and control an engineering or operational risk
+description: Record and control an engineering or operational risk
 title: "RISK-___ — "
 body:
   - type: textarea

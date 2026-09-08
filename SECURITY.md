@@ -25,7 +25,7 @@ Reports should include, where possible:
 Examples include:
 
 - exposed API keys, tokens, certificates, passwords, or private configuration;
-- authentication/authorization bypass in shore-vessel or service interfaces;
+- authentication/authorization bypass in shore-vehicle or service interfaces;
 - remote-command paths that could permit unintended propulsion, cutter, or actuator behaviour;
 - unsafe firmware/software failure modes that bypass intended interlocks or failsafes;
 - dependency vulnerabilities that materially affect the deployed system;
@@ -53,7 +53,7 @@ Physical actions require the appropriate human approval and local safety control
 - propulsion and cutter systems require deliberate test authorization and safe isolation;
 - RC/manual override and autopilot failsafes remain required where applicable;
 - a software stop is not a hardware emergency stop;
-- communication loss must not remove local vessel safety capability.
+- communication loss must not remove local vehicle safety capability.
 
 ## Handling and closure
 

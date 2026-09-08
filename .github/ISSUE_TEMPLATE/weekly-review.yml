@@ -1,24 +1,33 @@
 name: Weekly review
-about: Lightweight weekly engineering review
+description: Lightweight evidence-backed weekly engineering review and exception closure
 title: "WEEK-___ — YYYY-MM-DD"
 body:
   - type: textarea
-    id: done
+    id: completed
     attributes:
       label: Engineering completed / evidence produced
     validations:
       required: true
   - type: textarea
-    id: failed
+    id: exceptions
+    attributes:
+      label: AI/MCP audit exceptions
+      description: Include only unresolved exceptions from WEEKLY_AUDIT.md.
+  - type: textarea
+    id: failures
     attributes:
       label: Failures / blockers / assumptions changed
   - type: textarea
+    id: schedule_cost
+    attributes:
+      label: Schedule / cost variance requiring attention
+  - type: textarea
     id: decisions
     attributes:
-      label: Decisions / changes
+      label: Decisions / changes / approvals required
   - type: textarea
     id: next
     attributes:
-      label: Next authorised work
+      label: Next authorised engineering work
     validations:
       required: true
