@@ -8,7 +8,7 @@
 **Co-Supervisor:** Prof. Dr. Mostafa Zaki  
 
 **Repository:** `asv-nile-cleaning-swarm`  
-**GitHub:** https://github.com/kagetsu2/asv-nile-cleaning-swarm
+**GitHub:** https://github.com/aihamawd/asv-nile-cleaning-swarm
 
 ---
 
