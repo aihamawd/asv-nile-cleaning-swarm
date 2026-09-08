@@ -1,6 +1,6 @@
 name: Root-cause analysis
 about: Investigate a failure and establish evidence-backed root cause
- title: "RCA-___ — "
+title: "RCA-___ — "
 body:
   - type: input
     id: failure
