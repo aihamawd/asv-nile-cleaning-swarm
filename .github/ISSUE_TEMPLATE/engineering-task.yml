@@ -1,0 +1,51 @@
+name: Engineering Task
+description: Track a traceable engineering work item
+title: "[ENG] "
+labels: []
+body:
+  - type: input
+    id: project_id
+    attributes:
+      label: Project ID
+      description: Permanent ID when applicable (e.g. MECH-###, ELEC-###, SW-###, TEST-###)
+      placeholder: "MECH-001"
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: State the engineering outcome, not only the activity.
+    validations:
+      required: true
+  - type: textarea
+    id: basis
+    attributes:
+      label: Requirement / design basis
+      description: Link relevant REQ, SYS, ADR, previous test, calculation, or supervisor direction.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and deliverables
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance / verification
+      description: Define what evidence will establish completion.
+    validations:
+      required: true
+  - type: checkboxes
+    id: physical
+    attributes:
+      label: Physical-action gate
+      options:
+        - label: This task requires fabrication, energized hardware work, irreversible modification, procurement commitment, or field deployment and therefore needs explicit human approval before that action.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / output paths
+      description: Fill during execution with TEST/EXP/EVD IDs and repository paths.
