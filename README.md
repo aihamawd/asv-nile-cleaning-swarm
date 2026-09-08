@@ -1,36 +1,65 @@
+<div align="center">
+
 # Cooperative Autonomous Surface Vehicle Swarm for Nile Surface Cleaning
 
+### Autonomy · Cleaning · Cooperation · Experimental Validation
+
 **October University for Modern Sciences and Arts (MSA University)**  
-**Mechatronics Systems Engineering | Final-Year Graduation Project | 2026/2027**
+**Mechatronics Systems Engineering · Final-Year Graduation Project · 2026/2027**
 
-**Students:** Aiham Moustafa Awad · Omar Mohamed Bakr  
-**Main Supervisor:** Assoc. Prof. Dr. Amgad M. Bayoumy Aly  
-**Co-Supervisor:** Prof. Dr. Mostafa Zaki  
+**Aiham Moustafa Awad · Omar Mohamed Bakr**
 
-**Repository:** `asv-nile-cleaning-swarm`  
-**GitHub:** https://github.com/aihamawd/asv-nile-cleaning-swarm
+<br>
+
+[![CI](https://github.com/aihamawd/asv-nile-cleaning-swarm/actions/workflows/ci.yml/badge.svg)](https://github.com/aihamawd/asv-nile-cleaning-swarm/actions/workflows/ci.yml)
+![Last Commit](https://img.shields.io/github/last-commit/aihamawd/asv-nile-cleaning-swarm)
+![Open Issues](https://img.shields.io/github/issues/aihamawd/asv-nile-cleaning-swarm)
+![Contributors](https://img.shields.io/github/contributors/aihamawd/asv-nile-cleaning-swarm)
+![Repo Size](https://img.shields.io/github/repo-size/aihamawd/asv-nile-cleaning-swarm)
+
+![Status](https://img.shields.io/badge/Status-Active%20Development-2ea44f)
+![Current Phase](https://img.shields.io/badge/Current%20Phase-M1%20Legacy%20Characterisation-d4a72c)
+![Fleet](https://img.shields.io/badge/Fleet-3--4%20ASVs-0969da)
+![Academic Year](https://img.shields.io/badge/Academic%20Year-2026%2F27-8250df)
+
+![ROS 2](https://img.shields.io/badge/ROS%202-Jazzy-22314E?logo=ros&logoColor=white)
+![Gazebo](https://img.shields.io/badge/Gazebo-Harmonic-F58113)
+![ArduPilot](https://img.shields.io/badge/ArduPilot-Rover%2FBoat-1A73E8)
+![Git LFS](https://img.shields.io/badge/Git%20LFS-Engineering%20Assets-F05032?logo=git&logoColor=white)
+
+[Project Board](https://github.com/users/aihamawd/projects/1) · [Issues](https://github.com/aihamawd/asv-nile-cleaning-swarm/issues) · [Discussions](https://github.com/aihamawd/asv-nile-cleaning-swarm/discussions) · [Wiki](https://github.com/aihamawd/asv-nile-cleaning-swarm/wiki) · [Pull Requests](https://github.com/aihamawd/asv-nile-cleaning-swarm/pulls)
+
+</div>
 
 ---
 
+> **Terminology:** In this project, **ASV means Autonomous Surface Vehicle**. **Vehicle** is the preferred term for each individual ASV throughout the project documentation.
+
 ## Project Vision
 
-Design, fabricate, integrate, and experimentally validate a cooperative fleet of autonomous surface vessels (ASVs) for surface cleaning in representative Egyptian Nile environments.
+Design, fabricate, integrate, and experimentally validate a cooperative fleet of **Autonomous Surface Vehicles (ASVs)** for surface cleaning in representative Egyptian Nile environments.
 
-The project continues a previous MSA autonomous water-surface-cleaning robot and extends it toward a common multi-vessel architecture with improved physical cleaning, environmental-disturbance handling, fault-aware autonomy, and cooperative task allocation.
+The project continues a previous MSA autonomous water-surface-cleaning robot and extends it toward a common multi-vehicle architecture with improved physical cleaning, environmental-disturbance handling, fault-aware autonomy, and cooperative task allocation.
 
-### Current Fleet Baseline
+### At a Glance
 
-**3–4 physical ASVs**
+| Item | Current baseline |
+|---|---|
+| **Project window** | 24 Aug 2026 → 20 Jun 2027 |
+| **Fleet target** | 3–4 physical ASVs |
+| **New build** | 1 newly designed and fabricated ASV |
+| **Legacy integration** | 2–3 inherited ASVs, restored/retrofitted where technically feasible |
+| **Current gate** | M1 — Requirements & Legacy Vehicle Characterisation |
+| **Local autonomy** | Marine autopilot + onboard sensing/failsafes + ROS 2 mission interface |
+| **Fleet coordination** | Shore Fleet Manager at mission level only |
+| **Engineering record** | GitHub repository + Issues/Project + traceable evidence |
 
-- **1 new vessel** designed and fabricated during the project.
-- **2–3 inherited/legacy student vessels** assessed, restored where feasible, and retrofitted to a common cooperative fleet interface.
+Engineering quality, safety, reliability, measurable performance, and experimental evidence take priority over maximizing vehicle count.
 
-The number of operational vessels does not replace engineering quality as the primary objective. Additional vessels are integrated only when they contribute meaningful fleet-level functionality or experimental evidence.
-
-### Core System Goals
+## Core System Goals
 
 - Autonomous marine navigation using GNSS/IMU and a marine autopilot.
-- ROS 2 based high-level mission execution and system integration.
+- ROS 2-based high-level mission execution and system integration.
 - Floating-waste collection.
 - Physical water-hyacinth cutting, handling, capture, and retention.
 - Anti-entanglement and jam-aware mechanical/electrical design.
@@ -41,434 +70,207 @@ The number of operational vessels does not replace engineering quality as the pr
 - Repeatable experimental validation with traceable evidence.
 - Progressive testing from subsystem level to representative field conditions.
 
-### Control Architecture
+## System Architecture
 
-The system separates **local vessel autonomy** from **fleet-level mission coordination**.
+The system separates **local ASV autonomy** from **fleet-level mission coordination**.
 
-**Onboard each ASV**
-- GNSS/IMU state estimation
-- heading and speed control
-- differential propulsion
-- geofencing
-- Hold / RTL
-- local failsafes
-- RC/manual override
-- health monitoring
-- ROS 2 mission client
+```mermaid
+flowchart LR
+    FM[Shore Fleet Manager] -->|Mission-level tasks| A1[ASV 1]
+    FM -->|Mission-level tasks| A2[ASV 2]
+    FM -->|Mission-level tasks| A3[ASV 3 / 4]
 
-**Shore Fleet Manager**
-- mission planning
-- cleaning-area decomposition
-- shared task pool
-- vessel-state monitoring
-- task assignment/reassignment
-- mission progress
-- fleet logging
+    A1 --> L1[Local navigation + failsafes]
+    A2 --> L2[Local navigation + failsafes]
+    A3 --> L3[Local navigation + failsafes]
 
-The Fleet Manager issues **mission-level tasks only**. It does not continuously command motors or replace onboard safety/autonomy.
+    A1 --> C1[Cleaning system]
+    A2 --> C2[Cleaning system]
+    A3 --> C3[Cleaning system]
 
----
+    A1 -. state / progress .-> FM
+    A2 -. state / progress .-> FM
+    A3 -. state / progress .-> FM
+```
 
-# Team and Responsibility Split
+### Onboard Each ASV
 
-The project uses clear subsystem ownership while keeping integration, fleet autonomy, testing, and final validation shared between both students.
+- GNSS/IMU state estimation.
+- Heading and speed control.
+- Differential propulsion.
+- Geofencing.
+- Hold / RTL.
+- Local failsafes.
+- RC/manual override.
+- Health and power monitoring.
+- ROS 2 mission client.
+- Cleaning-system control and instrumentation.
 
-## Aiham Moustafa Awad
+### Shore Fleet Manager
 
-### Electrical, Control & Integration Lead
+- Mission planning.
+- Cleaning-area decomposition.
+- Shared task pool.
+- ASV-state monitoring.
+- Task assignment and reassignment.
+- Mission-progress tracking.
+- Fleet-level logging.
 
-Primary responsibility for:
+The Fleet Manager issues **mission-level tasks only**. It does not continuously command motors or replace onboard safety and autonomy.
 
-#### Electrical & Power
-- Legacy electrical-system assessment.
-- Main power architecture.
-- Battery selection and sizing.
-- BMS integration.
-- Fuse, isolation, and electrical protection.
-- DC-DC conversion.
-- Pack-level voltage/current/energy monitoring.
-- Waterproof wiring and marine connectors.
-- Electrical distribution and grounding.
+## Fleet Baseline
 
-#### Electronics & Embedded Systems
-- Sensors and instrumentation.
-- Leak detection.
-- propulsion-current monitoring.
-- cutter-current and jam detection.
-- load/fill sensing electronics.
-- auxiliary MCU integration where required.
-- embedded interfaces between sensors, actuators, autopilot, and ROS 2.
+The current engineering baseline targets **3–4 physical ASVs**:
 
-#### Navigation & Control
-- Marine autopilot integration.
-- ArduPilot Rover/Boat configuration.
-- GNSS/IMU integration.
-- heading and speed control.
-- differential-thrust configuration.
-- geofence, Hold, RTL, and failsafe configuration.
-- controller tuning.
-- current/drift compensation experiments.
-- navigation-performance evaluation.
+- **1 new ASV** designed and fabricated during this project.
+- **2–3 inherited/legacy ASVs** assessed, restored where feasible, and retrofitted to a common cooperative fleet interface.
 
-#### Cutter Electrical Integration
-- Cutter motor selection support.
-- motor driver / ESC.
-- current sensing.
-- overload and jam protection.
-- electrical interlocks.
-- emergency shutdown interfaces.
+Additional ASVs are integrated only when they contribute meaningful fleet-level functionality or experimental evidence.
 
-#### Simulation & Integration
-- ArduPilot SITL.
-- ROS 2 / Gazebo integration support.
-- electrical/control simulation.
-- telemetry and logging.
-- system-level integration troubleshooting.
+## Team & Responsibility Split
 
----
+Subsystem ownership is explicit, while integration, fleet autonomy, testing, and final validation remain shared.
 
-## Omar Mohamed Bakr
+| Owner | Primary responsibility |
+|---|---|
+| **Aiham Moustafa Awad** | Electrical architecture, power/protection, embedded systems, sensors/instrumentation, marine autopilot, navigation/control, propulsion control, cutter electrical integration, simulation and system integration |
+| **Omar Mohamed Bakr** | Hull/structure, hydrostatics and stability, CAD, collection system, water-hyacinth mechanical system, anti-entanglement design, propulsion mechanical integration, fabrication and mechanical testing |
+| **Shared** | ROS 2, Fleet Manager, cooperative allocation, perception integration, requirements, safety, procurement, system integration, experiments, validation, engineering documentation and final delivery |
 
-### Mechanical, Collection & Fabrication Lead
+### Aiham — Electrical, Control & Integration Lead
 
-Primary responsibility for:
+Primary ownership includes:
 
-#### Hull & Structure
-- Legacy mechanical/CAD assessment.
-- Robot hull and frame design.
-- structural layout.
-- material selection.
-- buoyancy calculations.
-- displacement.
-- freeboard.
-- stability.
-- centre of gravity.
-- trim.
-- structural reinforcement.
+- Legacy electrical/control/software baseline assessment.
+- Main DC architecture, battery/BMS, fusing, isolation, DC-DC conversion and monitoring.
+- Sensors, instrumentation, leak/load/current sensing and embedded interfaces.
+- ArduPilot Rover/Boat integration, GNSS/IMU, differential thrust, failsafes and controller tuning.
+- Cutter motor-drive support, current sensing, overload/jam protection and electrical interlocks.
+- SITL, ROS 2/Gazebo integration support, telemetry/logging and system-level debugging.
 
-#### Collection System
-- floating-waste collection geometry.
-- collection basket/net.
-- guides and funnels.
-- retention and anti-backflow mechanisms.
-- payload accommodation.
-- collection-system integration.
+### Omar — Mechanical, Collection & Fabrication Lead
 
-#### Water-Hyacinth Mechanical System
-- cutter mechanical architecture.
-- feeding/guide geometry.
-- cutting mechanism.
-- guards.
-- anti-entanglement mechanical features.
-- biomass capture and retention.
-- mechanical jam-recovery considerations.
-- serviceability.
+Primary ownership includes:
+
+- Legacy mechanical/CAD and hull-integrity assessment.
+- Hull/frame design, materials, buoyancy, displacement, freeboard, CG, trim and stability.
+- Floating-waste collection geometry, retention and payload accommodation.
+- Water-hyacinth cutter/feed/guide architecture, guards, anti-entanglement features and biomass retention.
+- Propulsion mounting, propeller protection, anti-fouling geometry and structural hard points.
+- Manufacturing drawings, fabrication coordination, mechanical assembly and physical mechanical testing.
 
 Final cutter topology remains evidence-driven and is frozen only after calculations and prototype testing.
 
-#### Propulsion Mechanical Integration
-- thruster/motor mounting.
-- propeller protection.
-- anti-fouling geometry.
-- structural hard points.
-- shaft/mount alignment where applicable.
+### Shared Engineering Work
 
-#### Fabrication & Mechanical Testing
-- manufacturing drawings.
-- fabrication coordination.
-- machining requirements.
-- mechanical waterproofing/enclosures.
-- mechanical assembly.
-- payload/stability testing.
-- structure and deformation testing.
-- cutter/collection mechanical testing.
+Both students jointly own:
 
----
+- ROS 2 integration and common interfaces.
+- Mission state machine and fleet client.
+- Shore Fleet Manager and shared task lifecycle.
+- Communication heartbeat, stale-state handling and communication-loss behaviour.
+- Cooperative task allocation and unfinished-work recovery.
+- Perception integration where justified by requirements/testing.
+- Mechanical/electrical/software interface definition.
+- Bench, float, propulsion, autonomy, cleaning, disturbance, multi-ASV and field validation.
+- Requirements, design reviews, BOM, procurement, risk, safety, experiment planning, evidence, report, poster, presentation and viva.
 
-## Shared Responsibilities
+## Engineering Operating Model
 
-Aiham and Omar jointly own:
+### GitHub = Engineering Source of Truth
 
-### ROS 2 & High-Level Software
-- ROS 2 system integration.
-- mission state machine.
-- vessel fleet client.
-- logging interfaces.
-- perception integration.
-- common message/interface definitions.
+This repository is the project's authoritative engineering record and primary storage location. It is intended to preserve the documentation, source code, native engineering files, experimental evidence, procurement records, and project history required to reproduce, audit, continue, and defend the project.
 
-Neither student is treated as a dedicated software developer; existing packages and previous project software should be reused and adapted where technically appropriate.
-
-### Fleet Coordination
-- Shore Fleet Manager.
-- geofenced cleaning-area decomposition.
-- coverage strategy.
-- shared task pool.
-- task ownership.
-- assignment and reassignment logic.
-- communication heartbeat.
-- stale-state handling.
-- communication-loss behaviour.
-- unfinished-work recovery.
-- multi-vessel testing.
-
-### Perception
-- RGB camera integration.
-- floating-waste detection.
-- water-hyacinth perception.
-- obstacle-sensing integration.
-- evaluation of additional range/depth sensing where justified experimentally.
-
-LiDAR, depth cameras, ToF, radar, RTK, and other advanced sensing are not assumed mandatory. They are introduced only when requirements or testing justify them.
-
-### System Integration
-- mechanical/electrical/software interface definition.
-- fleet-wide hardware compatibility.
-- common vessel interface.
-- configuration management.
-- debugging.
-- integration testing.
-
-### Experimental Validation
-- bench testing.
-- controlled float tests.
-- propulsion testing.
-- single-vessel autonomy.
-- cleaning-system testing.
-- water-hyacinth testing.
-- disturbance/current experiments.
-- multi-vessel communication.
-- cooperative task allocation.
-- fault/reallocation experiments.
-- representative field testing.
-
-### Project Engineering
-- requirements.
-- design reviews.
-- procurement decisions.
-- BOM.
-- risk management.
-- safety.
-- experiment planning.
-- evidence collection.
-- engineering book.
-- final report.
-- poster.
-- presentation.
-- viva preparation.
-
----
-
-# Operating Model
-
-## GitHub = Complete Engineering Source of Truth
-
-This repository is the project's complete engineering record and primary storage location.
-
-It contains the documentation, source code, native engineering files, experimental evidence, procurement records, and project history required to reproduce, audit, continue, and defend the project.
-
-Where practical, all project artifacts are stored directly in the repository. Large binary engineering files are tracked using **Git LFS**.
-
-Examples include:
-
-- CAD parts, assemblies, and drawings
-- SolidWorks native files
-- ANSYS models, setups, and relevant results
-- MATLAB/Simulink models
-- ROS 2 packages and configuration
-- firmware and embedded software
-- electrical schematics and PCB files
-- BOMs and component records
-- datasheets
-- experimental datasets
-- ROS bags
-- photographs
-- test videos
-- supplier quotations
-- invoices
-- signed documents
-- supervisor records
-- reports
-- presentations
-- posters
-- simulation inputs and relevant outputs
-
-Every significant engineering artifact should be linked to the appropriate permanent project ID where applicable, such as **REQ-###**, **ADR-###**, **EXP-###**, **TEST-###**, or **EVD-###**.
-
-### Large File Policy
-
-Large binary files that are important to project reproducibility or evidence are stored using **Git LFS**.
-
-Regenerable temporary data should not be committed unnecessarily.
-
-Examples of files that may be excluded include:
-
-- ANSYS temporary/cache directories
-- compiler/build artifacts
-- ROS 2 `build/`, `install/`, and `log/` directories
-- temporary simulation files
-- software caches
-- duplicated exports
-- automatically generated intermediate files
-
-The rule is:
+Large binary engineering files that are important to reproducibility or evidence are tracked with **Git LFS**. Regenerable caches, build outputs, temporary simulation files, and duplicate exports should not be committed unnecessarily.
 
 > **Preserve the engineering artifact, evidence, inputs, configurations, and relevant outputs. Exclude only files that can be regenerated without loss of engineering information.**
 
-No external project-storage system is assumed. GitHub is the authoritative project memory.
+### Digital Thread
 
----
+Significant engineering work should remain traceable through permanent project IDs:
 
-# Engineering Principles
+`REQ` · `SYS` · `ADR` · `MECH` · `ELEC` · `EMB` · `SW` · `NAV` · `VIS` · `FLT` · `PUR` · `BOM` · `SUP` · `EXP` · `TEST` · `FAIL` · `RCA` · `CHG` · `RISK` · `SAFE` · `MIN` · `WEEK` · `EVD`
 
-1. **Engineering quality before robot quantity.**
+The intended flow is:
+
+```text
+Requirement
+    ↓
+Design / Architecture Decision
+    ↓
+Implementation
+    ↓
+Experiment / Verification
+    ↓
+Evidence
+    ↓
+Engineering Conclusion
+```
+
+### Safety Boundary
+
+Repository approval, merged software, or a passing CI check **does not authorize physical operation**.
+
+Irreversible fabrication, energized hardware testing, propulsion/cutter operation, field deployment, and purchase commitments require explicit human approval under the project governance process. A software stop is not treated as a substitute for a hardware emergency-stop or physical isolation mechanism.
+
+See [`GOVERNANCE.md`](GOVERNANCE.md), [`SECURITY.md`](SECURITY.md), [`CONTRIBUTING.md`](CONTRIBUTING.md), and [`EVIDENCE_POLICY.md`](EVIDENCE_POLICY.md).
+
+## Engineering Principles
+
+1. **Engineering quality before vehicle quantity.**
 2. **Evidence before design freeze.**
 3. **Maximum engineering time, minimum administrative burden.**
-4. **No unnecessary rebuilding of previously solved work.**
+4. **Reuse proven work before rebuilding it.**
 5. **No engineering claim without traceable evidence.**
-6. **No major hardware purchase without requirement or calculation basis.**
-7. **Local safety remains onboard each vessel.**
+6. **No major hardware purchase without a requirement or calculation basis.**
+7. **Local safety remains onboard each ASV.**
 8. **Fleet communication loss must not remove local autonomy.**
 9. **Physical testing takes priority over simulation-only claims.**
 10. **Failures are engineering evidence and must be recorded, not hidden.**
 
----
+## Repository Layout
 
-# Engineering Record ID Taxonomy
-
-| Prefix | Category | Example |
-|---|---|---|
-| **REQ-###** | Requirement | REQ-007 |
-| **SYS-###** | System architecture | SYS-003 |
-| **ADR-###** | Architecture / design decision | ADR-005 |
-| **MECH-###** | Mechanical | MECH-011 |
-| **ELEC-###** | Electrical | ELEC-008 |
-| **EMB-###** | Embedded | EMB-014 |
-| **SW-###** | Software / ROS 2 | SW-021 |
-| **NAV-###** | Navigation / control | NAV-006 |
-| **VIS-###** | Vision / perception | VIS-004 |
-| **FLT-###** | Fleet coordination | FLT-009 |
-| **PUR-###** | Purchase | PUR-018 |
-| **BOM-###** | Bill of materials | BOM-003 |
-| **SUP-###** | Supplier | SUP-005 |
-| **EXP-###** | Experiment | EXP-016 |
-| **TEST-###** | Verification / validation | TEST-023 |
-| **FAIL-###** | Failure | FAIL-006 |
-| **RCA-###** | Root-cause analysis | RCA-003 |
-| **CHG-###** | Engineering change | CHG-005 |
-| **RISK-###** | Risk | RISK-008 |
-| **SAFE-###** | Safety | SAFE-012 |
-| **MIN-###** | Supervisor meeting | MIN-003 |
-| **WEEK-###** | Weekly review | WEEK-007 |
-| **EVD-###** | Evidence reference | EVD-042 |
-
-IDs are permanent once issued.
-
----
-
-# Repository Structure
+Current top-level repository structure:
 
 ```text
+├── .github/                 # Issue/PR templates, CODEOWNERS, CI, Dependabot
+├── docs/                    # Requirements, architecture, PM and engineering records
+├── experiments/             # Experimental work and evidence-linked results
+├── firmware/                # Embedded firmware
+├── hardware/                # Mechanical/electrical/interface/BOM engineering
+├── navigation/              # Navigation and control work
+├── project-data/            # Traceability, cost, risk and evidence registers
+├── ros2_ws/                 # ROS 2 workspace
+├── simulation/              # Simulation assets and configurations
+│
 ├── README.md
-├── CONTRIBUTING.md
 ├── GOVERNANCE.md
+├── CONTRIBUTING.md
 ├── EVIDENCE_POLICY.md
-│
-├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   │   ├── engineering-task.yml
-│   │   ├── requirement.yml
-│   │   ├── experiment.yml
-│   │   ├── verification-test.yml
-│   │   ├── failure.yml
-│   │   ├── rca.yml
-│   │   ├── engineering-change.yml
-│   │   ├── purchase.yml
-│   │   ├── risk-safety.yml
-│   │   ├── design-decision.yml
-│   │   ├── supervisor-meeting.yml
-│   │   └── weekly-review.yml
-│   ├── PULL_REQUEST_TEMPLATE.md
-│   └── workflows/
-│       ├── weekly-audit.yml
-│       ├── gantt-generate.yml
-│       └── ci.yml
-│
-├── docs/
-│   ├── requirements/
-│   ├── architecture/
-│   ├── design-decisions/
-│   ├── literature/
-│   ├── risk/
-│   ├── safety/
-│   ├── test-plans/
-│   ├── supervisor-notes/
-│   ├── weekly-reviews/
-│   ├── project-management/
-│   │   ├── GITHUB_PROJECT_SETUP.md
-│   │   └── gantt/
-│   └── engineering-book/
-│
-├── ros2_ws/
-│   └── src/
-├── firmware/
-├── simulation/
-├── navigation/
-├── perception/
-├── fleet_coordination/
-├── cleaning_system/
-│
-├── hardware/
-│   ├── mechanical/
-│   ├── electrical/
-│   ├── interfaces/
-│   └── bom/
-│
-├── experiments/
-├── tests/
-│
-├── project-data/
-│   ├── cost-register.csv
-│   ├── failure-register.csv
-│   ├── experiment-index.csv
-│   ├── evidence-index.csv
-│   ├── risk-register.csv
-│   └── requirements-traceability.csv
-│
-├── tools/
-│   ├── audit/
-│   ├── gantt/
-│   └── reporting/
-│
-└── reports/
-    ├── proposal/
-    ├── poster/
-    └── final-report/
+└── SECURITY.md
 ```
 
----
-
-# Project Milestones
+## Project Milestones
 
 | ID | Milestone |
 |---|---|
-| **M1** | Requirements & Legacy Vessel Characterisation |
+| **M1** | Requirements & Legacy Vehicle Characterisation |
 | **M2** | Fleet Mechanical Readiness |
 | **M3** | Electrical & Propulsion Integration |
-| **M4** | Single-Vessel Autonomous Navigation |
+| **M4** | Single-ASV Autonomous Navigation |
 | **M5** | Cleaning / Water-Hyacinth Handling Prototype |
-| **M6** | Multi-Vessel Communication |
+| **M6** | Multi-ASV Communication |
 | **M7** | Cooperative Task Allocation |
 | **M8** | Fault-Aware Reallocation Behaviour |
 | **M9** | Controlled Experimental Validation |
 | **M10** | Representative Nile-Environment Validation |
 | **M11** | Final Engineering Book, Report, Poster & Viva |
 
----
+The live schedule, assignments, dependencies, status, and date fields are maintained in the [GitHub Project](https://github.com/users/aihamawd/projects/1).
 
-# Validation Philosophy
+## Validation Philosophy
 
-Development progresses through controlled gates:
+Development progresses through controlled engineering gates:
 
 ```text
 Bench
@@ -477,11 +279,11 @@ Subsystem Test
   ↓
 Controlled Float / Propulsion
   ↓
-Single-Vessel Autonomous Operation
+Single-ASV Autonomous Operation
   ↓
 Cleaning / Hyacinth Handling
   ↓
-Multi-Vessel Communication
+Multi-ASV Communication
   ↓
 Cooperative Task Allocation
   ↓
@@ -492,32 +294,28 @@ Representative Field Validation
 
 Large fleet demonstrations do not substitute for subsystem reliability or quantitative experimental evidence.
 
----
-
-# Getting Started
+## Working With the Repository
 
 1. Read [`GOVERNANCE.md`](GOVERNANCE.md).
 2. Read [`CONTRIBUTING.md`](CONTRIBUTING.md).
 3. Read [`EVIDENCE_POLICY.md`](EVIDENCE_POLICY.md).
-4. Review current requirements and open engineering issues.
-5. Create work using the appropriate GitHub Issue template.
-6. Link implementation, experiments, failures, changes, and evidence.
-7. Preserve the digital thread from requirement to validation.
+4. Read [`SECURITY.md`](SECURITY.md).
+5. Check the [Current Project Queue](https://github.com/users/aihamawd/projects/1).
+6. Use the appropriate GitHub Issue template for new engineering work.
+7. Link implementation, experiments, failures, changes, and evidence to the relevant issue/ID.
+8. Use pull requests for meaningful repository changes and preserve the requirement-to-evidence digital thread.
 
----
+## Project Spaces
 
-# Quick Links
+- **[GitHub Project](https://github.com/users/aihamawd/projects/1)** — execution, dates, assignments and Roadmap.
+- **[Issues](https://github.com/aihamawd/asv-nile-cleaning-swarm/issues)** — committed engineering work.
+- **[Discussions](https://github.com/aihamawd/asv-nile-cleaning-swarm/discussions)** — questions, design thinking and team discussion.
+- **[Wiki](https://github.com/aihamawd/asv-nile-cleaning-swarm/wiki)** — navigable project knowledge base.
+- **[Pull Requests](https://github.com/aihamawd/asv-nile-cleaning-swarm/pulls)** — reviewed repository changes.
+- **[Documentation](docs/)** — engineering documentation.
+- **[Project Data](project-data/)** — traceability and management registers.
 
-- [Issues & Engineering Tasks](https://github.com/kagetsu2/asv-nile-cleaning-swarm/issues)
-- [Pull Requests](https://github.com/kagetsu2/asv-nile-cleaning-swarm/pulls)
-- [Project Board](https://github.com/kagetsu2/asv-nile-cleaning-swarm/projects)
-- [Documentation](docs/)
-- [Project Data](project-data/)
-- [Engineering Book](docs/engineering-book/)
-
----
-
-# Supervision
+## Supervision
 
 **Main Supervisor**  
 Assoc. Prof. Dr. Amgad M. Bayoumy Aly
@@ -525,21 +323,16 @@ Assoc. Prof. Dr. Amgad M. Bayoumy Aly
 **Co-Supervisor**  
 Prof. Dr. Mostafa Zaki
 
-Major scope, budget, safety, and architecture changes are subject to supervisor review.
+Major scope, budget, safety, architecture, and field-testing changes are subject to supervisor review.
 
 ---
 
-# Contact / Ownership
+<div align="center">
 
-**Aiham Moustafa Awad**  
-Electrical · Control · Embedded · Autopilot · Navigation · Power · System Integration
+**Cooperative Autonomous Surface Vehicle Swarm for Nile Surface Cleaning**
 
-**Omar Mohamed Bakr**  
-Mechanical · Hull · Structure · Collection · Hyacinth Mechanism · Fabrication
+*Build · Measure · Validate · Cooperate*
 
-**Shared**  
-ROS 2 · Fleet Coordination · Perception Integration · Testing · Procurement · Documentation · Final Validation
+**Last updated:** 2026-09-08
 
----
-
-**Last updated:** 2026-09-07
+</div>
