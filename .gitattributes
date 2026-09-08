@@ -1,0 +1,38 @@
+# Native CAD / CAE / simulation artifacts
+*.SLDPRT filter=lfs diff=lfs merge=lfs -text
+*.SLDASM filter=lfs diff=lfs merge=lfs -text
+*.SLDDRW filter=lfs diff=lfs merge=lfs -text
+*.step filter=lfs diff=lfs merge=lfs -text
+*.stp filter=lfs diff=lfs merge=lfs -text
+*.iges filter=lfs diff=lfs merge=lfs -text
+*.igs filter=lfs diff=lfs merge=lfs -text
+*.x_t filter=lfs diff=lfs merge=lfs -text
+*.x_b filter=lfs diff=lfs merge=lfs -text
+*.wbpj filter=lfs diff=lfs merge=lfs -text
+*.wbpz filter=lfs diff=lfs merge=lfs -text
+*.mechdb filter=lfs diff=lfs merge=lfs -text
+*.cas.h5 filter=lfs diff=lfs merge=lfs -text
+*.dat.h5 filter=lfs diff=lfs merge=lfs -text
+*.slx filter=lfs diff=lfs merge=lfs -text
+*.slxc filter=lfs diff=lfs merge=lfs -text
+
+# Evidence / datasets that can become large
+*.bag filter=lfs diff=lfs merge=lfs -text
+*.mcap filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.avi filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.7z filter=lfs diff=lfs merge=lfs -text
+
+# Keep text-based engineering sources diffable
+*.md text eol=lf
+*.csv text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.c text eol=lf
+*.h text eol=lf
