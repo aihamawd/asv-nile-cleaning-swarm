@@ -1,0 +1,64 @@
+# ROS 2 / colcon
+build/
+install/
+log/
+**/build/
+**/install/
+**/log/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# C/C++ / CMake
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+compile_commands.json
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.tmp
+~$*
+
+# MATLAB / Simulink generated/cache
+slprj/
+*.slxc
+*.autosave
+*.asv
+
+# ANSYS / solver temporary and cache data
+*.lock
+*.lck
+*.jou.bak
+**/_ProjectScratch/
+**/dp0/SYS/MECH/*.tmp
+
+# Gazebo / simulation cache
+.gz/
+.gazebo/
+
+# Logs and transient telemetry
+*.log
+*.bag.active
+
+# Secrets / local machine configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Generated reports/exports that are reproducible
+*.bak
