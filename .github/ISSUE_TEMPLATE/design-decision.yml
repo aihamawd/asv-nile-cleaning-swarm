@@ -1,5 +1,5 @@
 name: Design decision
-about: Record an evidence-backed architecture or design decision
+description: Record an evidence-backed architecture or design decision
 title: "ADR-___ — "
 body:
   - type: textarea

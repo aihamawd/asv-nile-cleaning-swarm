@@ -1,7 +1,14 @@
 name: Purchase
-about: Record a technically justified project purchase
+description: Record a technically justified project purchase or commitment
 title: "PUR-___ — "
 body:
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
   - type: textarea
     id: item
     attributes:
@@ -11,18 +18,42 @@ body:
   - type: textarea
     id: basis
     attributes:
-      label: Requirement / calculation / design basis
+      label: Engineering purpose / related requirement, task or calculation
+      description: Link the REQ/MECH/ELEC/etc. record that justifies the purchase.
     validations:
       required: true
   - type: textarea
-    id: suppliers
+    id: supplier
     attributes:
-      label: Local supplier / quotation / alternatives
+      label: Supplier / quotation / alternatives considered
   - type: input
-    id: cost
+    id: unit_cost
     attributes:
-      label: Expected cost (EGP)
+      label: Unit cost (EGP)
+  - type: input
+    id: quantity
+    attributes:
+      label: Quantity
+  - type: dropdown
+    id: purchase_type
+    attributes:
+      label: Purchase type
+      options: [First purchase, Replacement, Rework/corrective, Consumable, Other]
+    validations:
+      required: true
+  - type: input
+    id: related_failure
+    attributes:
+      label: Related FAIL ID, if replacement/rework
   - type: textarea
     id: approval
     attributes:
       label: Approval / budget impact
+      description: Purchase commitments require explicit human approval.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Quotation / invoice / receipt evidence
+      description: Link EVD ID and repository/Drive location when available.

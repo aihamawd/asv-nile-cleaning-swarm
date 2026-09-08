@@ -1,5 +1,5 @@
 name: Root-cause analysis
-about: Investigate a failure and establish evidence-backed root cause
+description: Investigate a failure and establish an evidence-backed root cause
 title: "RCA-___ — "
 body:
   - type: input
@@ -15,12 +15,26 @@ body:
     validations:
       required: true
   - type: textarea
+    id: hypotheses
+    attributes:
+      label: Competing hypotheses and elimination evidence
+    validations:
+      required: true
+  - type: textarea
     id: cause
     attributes:
-      label: Root cause / competing hypotheses
+      label: Established root cause / confidence / remaining uncertainty
     validations:
       required: true
   - type: textarea
     id: corrective
     attributes:
-      label: Corrective action and verification plan
+      label: Corrective action / related CHG
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Required retest / verification plan
+    validations:
+      required: true
