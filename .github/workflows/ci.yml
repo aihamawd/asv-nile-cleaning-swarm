@@ -1,0 +1,66 @@
+name: Repository CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+
+      - name: Check required governance files
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            README.md
+            GOVERNANCE.md
+            CONTRIBUTING.md
+            EVIDENCE_POLICY.md
+            .gitignore
+            .gitattributes
+            docs/architecture/SYS-001_system-architecture.md
+            docs/requirements/REQ-BASELINE.md
+            project-data/requirements-traceability.csv
+            project-data/evidence-index.csv
+          )
+          for f in "${required[@]}"; do
+            test -f "$f" || { echo "Missing required file: $f"; exit 1; }
+          done
+
+      - name: Reject common generated ROS 2 directories
+        shell: bash
+        run: |
+          set -euo pipefail
+          bad="$(git ls-files | grep -E '(^|/)(build|install|log)/' || true)"
+          if [ -n "$bad" ]; then
+            echo "Generated ROS/colcon directories are tracked:"
+            echo "$bad"
+            exit 1
+          fi
+
+      - name: Basic CSV header checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          head -n 1 project-data/requirements-traceability.csv | grep -q '^requirement_id,'
+          head -n 1 project-data/evidence-index.csv | grep -q '^evidence_id,'
+
+      - name: Check for obvious committed secret filenames
+        shell: bash
+        run: |
+          set -euo pipefail
+          bad="$(git ls-files | grep -E '(^|/)(\.env|secrets?/|.*\.(pem|key))$' || true)"
+          if [ -n "$bad" ]; then
+            echo "Potential secret material is tracked:"
+            echo "$bad"
+            exit 1
+          fi
