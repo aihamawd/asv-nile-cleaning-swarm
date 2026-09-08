@@ -1,4 +1,4 @@
-# Cooperative Autonomous Surface Vessel Swarm for Nile Surface Cleaning
+# Cooperative Autonomous Surface Vehicle Swarm for Nile Surface Cleaning
 
 **October University for Modern Sciences and Arts (MSA University)**  
 **Mechatronics Systems Engineering | Final-Year Graduation Project | 2026/2027**
