@@ -1,6 +1,6 @@
 name: Weekly review
 about: Lightweight weekly engineering review
- title: "WEEK-___ — YYYY-MM-DD"
+title: "WEEK-___ — YYYY-MM-DD"
 body:
   - type: textarea
     id: done
