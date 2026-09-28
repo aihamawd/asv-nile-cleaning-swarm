@@ -1,42 +1,30 @@
 # Weekly AI/MCP Exception Audit
 
-Run once per week and report **exceptions only**. The purpose is to protect traceability without creating a weekly administrative burden for the students.
+Report exceptions only.
 
 ## Checks
 
-1. `Done`/closed task without acceptance evidence.
-2. Open task past Target date.
+1. Closed/Done task without acceptance evidence.
+2. Open task past current Gantt target.
 3. Active task without an assignee.
-4. `[Both]` active task whose actual Primary Owner/Reviewer split is still ambiguous after execution has materially begun.
-5. Purchase without technical purpose, approval status or invoice/quotation evidence.
-6. Experiment/test without raw-data location, result or conclusion.
-7. Failure without evidence, containment or next action.
-8. Recurrent failure family without RCA.
-9. RCA without corrective action or verification plan.
-10. Engineering change without required retest/re-verification.
-11. Requirement without a planned/actual verification link.
-12. Evidence entry without a valid source record or location.
-13. Supervisor action past target date or not linked to affected work.
-14. Schedule slip that affects a downstream gate.
-15. Budget/committed-cost variance requiring review.
-16. Cloud Drive evidence not indexed in GitHub.
-
-## Output format
-
-```text
-WEEK-### EXCEPTIONS
-
-1. EXP-### — conclusion missing.
-2. PUR-### — invoice/quotation evidence missing.
-3. FAIL-### — recurrence detected; RCA required.
-4. NAV-### — target missed; downstream gate impact requires review.
-```
-
-No exception means no administrative action is required beyond the normal weekly record.
+4. Joint task with unclear Primary Owner/Reviewer after work begins.
+5. Purchase without requirement/calculation basis, approval state or quotation/invoice evidence.
+6. Purchase that duplicates usable legacy hardware without a documented reason.
+7. Experiment/test without raw-data location, result or conclusion.
+8. Failure without evidence, containment or next action.
+9. Recurrent failure family without RCA.
+10. Engineering change without required retest.
+11. Requirement without planned/actual verification.
+12. Evidence entry without valid source/location.
+13. Supervisor action past target.
+14. Schedule slip affecting downstream gate.
+15. Budget variance from the EGP 40k baseline requiring review.
+16. Any task/file still assuming mandatory shore Fleet Manager, ESP32 or funded radar.
+17. Any claim that FloW requires a new training dataset.
+18. Any ML function entering mission control without deterministic baseline/acceptance evidence.
+19. Any physical ASV purchase/fabrication decision made before the relevant measurement gate.
+20. Any current/wind result presented without clear distinction between simulated ground truth, measured environment and inferred disturbance.
 
 ## Rules
 
-- Do not infer missing measured values or evidence.
-- Do not silently change historical dates or results.
-- Automatically fix only administrative inconsistencies that are unambiguous and within AI/MCP authority.
-- Escalate engineering judgement, baseline/scope changes, major failure closure, budget baseline changes and final validation acceptance to the students.
+Do not infer measured values, costs, results or causes. Automatically fix only unambiguous administrative inconsistencies. Escalate baseline/scope, major failure closure, budget changes and final validation acceptance.

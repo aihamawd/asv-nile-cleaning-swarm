@@ -1,16 +1,15 @@
 # Experiments
 
-Create one directory per significant experiment using its permanent ID, for example `EXP-016_static-thrust/`.
+Every experiment must state:
 
-Each experiment directory should contain or link to:
+- engineering question/hypothesis;
+- vehicle and hardware revision;
+- software commit/configuration;
+- environment and disturbance;
+- procedure and trials;
+- measured variables and metrics;
+- raw evidence location;
+- result and conclusion;
+- related requirement/task/failure/change.
 
-- objective and hypothesis/question;
-- tested configuration/revision;
-- procedure;
-- raw data/evidence;
-- processing script where applicable;
-- measured result;
-- anomalies/failures;
-- conclusion and next action.
-
-Do not overwrite failed runs with successful reruns; preserve both and link them through the evidence index.
+Priority campaigns include thrust-current maps, flotation/stability, collector capture/retention, Pontederia feed/cutter/jam, ToF/dock characterization, LoRa range/PDR/partition, MSS↔VRX↔physical dynamics, fleet CBBA/reallocation, and deterministic-vs-ML A/B tests.

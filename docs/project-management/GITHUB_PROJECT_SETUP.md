@@ -1,77 +1,54 @@
 # GitHub Project Configuration — ASV Swarm for Nile Cleaning
 
-**Operational repository:** `aihamawd/asv-nile-cleaning-swarm`
-**GitHub Project:** `ASV Swarm for Nile Cleaning` — user project #1
+**Operational repository:** `aihamawd/asv-nile-cleaning-swarm`  
+**Architecture rebaseline:** 28 September 2026
 
-The Project is an execution view over repository Issues. It must not become a second independent task database.
+The Project is an execution view over repository Issues and must not become a second independent task database.
 
-## Current hierarchy
+## Hierarchy
 
-The repository contains **11 milestone/gate parent issues plus 58 engineering sub-issues (69 project items total)**.
+11 parent milestone/gate issues contain executable engineering sub-issues. Titles and bodies are rebaselined to the decentralized architecture.
 
-Parent gates are intentionally unassigned; executable sub-issues carry the actual assignees.
+## Current phase
 
-## Live fields
+Architecture freeze + pre-build engineering.
 
-- Title
-- Assignees
-- Status
-- Start date
-- Target date
-- Parent issue
-- Sub-issues progress
-- Labels
-- Linked pull requests
-- Reviewers (built-in where applicable)
+Current active focus:
 
-Start and Target dates are populated across all 69 project items.
-
-## Live views
-
-1. **Master Plan** — complete execution table.
-2. **Execution Board** — status board.
-3. **Current Queue** — `status:"In Progress"`.
-4. **Roadmap** — Start/Target timeline.
-5. **Aiham Tasks** — `assignee:aihamawd`.
-6. **Omar Tasks** — `assignee:omaramer13`.
-7. **Milestone Gates** — `no:assignee`.
-
-## Assignment policy
-
-GitHub Assignees are authoritative:
-
-- `[Aiham]` → `@aihamawd`
-- `[Omar]` → `@omaramer13`
-- `[Both]` → both while the work is genuinely joint
-
-The bracketed title marker is a visual planning cue; it does not replace the Assignees field.
-
-For joint tasks that become predominantly one student's work, establish Primary Owner + Reviewer/Supporting Engineer when the task becomes active so individual contribution remains defensible.
+- legacy fleet baseline;
+- hydrostatics/fiberglass Robot A;
+- propulsion sizing;
+- low-level controller decision;
+- collector/Pontederia mechanism trials;
+- Pi/STM32/SX1262 interfaces;
+- MSS + VRX current/wind baseline;
+- FloW image-only perception pipeline.
 
 ## Status policy
 
-The live Status field currently exposes:
+If the Project UI still exposes only `Todo / In Progress / Done`, use Issue comments/body for Blocked/Testing/Review context rather than creating a competing status store.
 
-`Todo · In Progress · Done`
+## Assignment policy
 
-Preferred mature workflow when the Project field can be safely extended:
-
-`Todo → Ready → In Progress → Blocked / Testing / Review → Done`
-
-Until the live field is extended, do not create duplicate status labels or a second status spreadsheet. Use the Issue/PR evidence and comments to explain a temporary blocker/test/review state while keeping the Project field authoritative.
-
-## Initial execution state — 8 September 2026
-
-- `#14 M1.1 [Both]` — In Progress — Aiham + Omar.
-- `#15 M1.2 [Omar]` — In Progress — Omar.
-- `#16 M1.3 [Aiham]` — In Progress — Aiham.
-- `#17 M1.4` — next after relevant audit evidence.
-- `#18 M1.5` — M1 gate-closure task.
-
-## Project/PR integration
-
-Visible views include **Linked pull requests** so an active engineering task can be traced directly to the reviewed repository change. Meaningful changes should use a feature/fix branch and PR under the protected `main` policy.
+- `[Aiham]` → @aihamawd;
+- `[Omar]` → @omaramer13;
+- `[Both]` → both while genuinely joint.
 
 ## Roadmap rule
 
-GitHub Project Start/Target fields own the operational schedule. `project-data/gantt.csv` and rendered Gantt output are reporting/generated representations and must not diverge into a separate schedule.
+`docs/project-management/GANTT.md` and `project-data/gantt.csv` contain the 28 Sep schedule rebaseline.
+
+Project-v2 Start/Target fields should be updated to match these dates when the connector/API surface exposes writable Project fields. Do not invent a second date truth.
+
+## Architecture reminders
+
+- no mandatory shore Fleet Manager;
+- no ESP32 requirement;
+- SX1262 directly on STM32;
+- FloW image-only YOLO, no new training dataset;
+- no funded radar;
+- LiDAR conditional by role;
+- ToF for close docking;
+- custom PCB intent;
+- Robot A fiberglass build;
+- performance-based procurement.
