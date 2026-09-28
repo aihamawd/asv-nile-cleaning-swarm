@@ -1,53 +1,92 @@
 # Cooperative Autonomous Surface Vehicle Swarm for Nile Surface Cleaning — Master Execution Plan
 
-**Project period:** August 2026 – June 2027
-**Repository:** `aihamawd/asv-nile-cleaning-swarm`
-**Operating baseline:** 3–4 physical ASVs: one new-build vehicle plus 2–3 inherited/legacy vehicles where technically viable.
+**Project period:** August 2026 – June 2027  
+**Architecture rebaseline:** 28 September 2026  
+**Operating baseline:** 3–4 heterogeneous physical ASVs: one new fiberglass build + viable legacy retrofits.
 
 ## Execution rules
 
-1. GitHub Issues are the executable work items; milestone issues are parents and engineering tasks are sub-issues.
-2. Requirements, design decisions, experiments, tests, failures and evidence retain permanent repository IDs (`REQ-###`, `ADR-###`, `EXP-###`, `TEST-###`, `FAIL-###`, `EVD-###`).
-3. Evidence precedes design freeze. Major architecture, purchase and fabrication decisions require a traceable basis.
-4. Simulation/bench work may proceed autonomously; physical fabrication, deployment and safety-critical actions require human approval and supervision.
-5. Local vehicle autonomy and safety remain onboard. The shore Fleet Manager issues mission-level tasks only.
-6. The physical fleet target is 3–4 vehicles, but engineering quality and repeatable evidence take priority over vehicle count.
+1. GitHub Issues are executable work; parent issues are milestone gates.
+2. Evidence precedes design freeze, purchase and fabrication release.
+3. Simulation/bench work may proceed autonomously; physical/irreversible work remains human-supervised.
+4. Local navigation, hard safety, geofence, RC override and actuator interlocks remain onboard.
+5. Fleet coordination is **decentralized by baseline**. No mandatory shore Fleet Manager.
+6. Each main ASV uses a two-controller concept where feasible: role-sized Linux SBC for ROS 2/perception/mission + STM32/autopilot-class controller for real-time control/safety/I/O.
+7. SX1262 LoRa connects directly to STM32; no ESP32 is required.
+8. FloW image data is reused for YOLO; no new training dataset is planned.
+9. Radar is outside the funded baseline.
+10. Procurement is performance-based, role-specific and reuse-first.
 
 ## Milestone gates
 
-| ID | Milestone | Planned window | Gate output |
+| ID | Milestone | Rebaselined window | Gate output |
 |---|---|---|---|
-| M1 | Requirements & Legacy Vehicle Characterisation | 24 Aug–30 Sep 2026 | Traceable requirements + verified legacy baseline |
-| M2 | Fleet Mechanical Readiness | 15 Sep–15 Dec 2026 | Mechanically justified new-build/retrofit architecture |
-| M3 | Electrical & Propulsion Integration | 20 Sep 2026–15 Jan 2027 | Safe, measured power/propulsion/electrical baseline |
-| M4 | Single-Vehicle Autonomous Navigation | 15 Oct 2026–15 Feb 2027 | Repeatable autonomous waypoint/coverage operation |
-| M5 | Cleaning / Water-Hyacinth Handling Prototype | 20 Sep 2026–15 Feb 2027 | Evidence-based cutter/collection design freeze |
-| M6 | Multi-Vehicle Communication | 15 Jan–15 Mar 2027 | Stable common vehicle interface and heartbeat behaviour |
-| M7 | Cooperative Task Allocation | 15 Feb–15 Apr 2027 | Demonstrated shared task pool and cooperative coverage |
-| M8 | Fault-Aware Reallocation Behaviour | 1 Mar–30 Apr 2027 | Demonstrated withdrawal/reallocation/recovery cases |
-| M9 | Controlled Experimental Validation | 1 Apr–20 May 2027 | Quantified controlled test campaign |
-| M10 | Representative Nile-Environment Validation | 10 May–5 Jun 2027 | Approved field-validation evidence package |
-| M11 | Final Engineering Book, Report, Poster & Viva | 24 Aug 2026–20 Jun 2027 | Defensible final submission and reproducible repository |
+| M1 | Requirements & Legacy Fleet Characterisation | 24 Aug–15 Oct 2026 | Verified fleet baseline + current requirements/metrics |
+| M2 | Mechanical, Hull & Payload Readiness | 15 Sep 2026–15 Jan 2027 | Hydrostatics, fiberglass Robot A and retrofit/payload fabrication baseline |
+| M3 | Power, Propulsion & Embedded Electrical Integration | 20 Sep 2026–15 Feb 2027 | Measured thrust/power, protected electrical architecture, PCB/interface baseline |
+| M4 | Single-ASV Autonomy, Perception & Simulation | 1 Oct 2026–15 Mar 2027 | Repeatable navigation + FloW/ranging + MSS/VRX baseline |
+| M5 | Collection, Pontederia Handling & Dock Prototype | 20 Sep 2026–15 Mar 2027 | Evidence-based collector/plant-handling/dock design freeze |
+| M6 | Peer Communication & Common Fleet State | 15 Jan–1 Apr 2027 | Stable STM32-SX1262 transport, shared state and timeout behaviour |
+| M7 | Decentralized Coverage, CBBA & Cooperation | 15 Feb–30 Apr 2027 | CBBA task ownership, coverage and cooperative payload behaviour |
+| M8 | Fault-Aware Reallocation, Docking & Service | 15 Mar–10 May 2027 | Partition/rejoin, withdrawal, dock-token and service recovery evidence |
+| M9 | Controlled Experimental Validation & AI/ML Ablation | 1 Apr–31 May 2027 | Quantified controlled tests and algorithm-vs-ML comparisons |
+| M10 | Representative Nile-Environment Validation | 20 May–10 Jun 2027 | Approved field evidence package |
+| M11 | Engineering Book, Report, Poster, Viva & Release | 24 Aug 2026–20 Jun 2027 | Defensible final submission and reproducible repository |
 
 ## Dependency spine
 
 `M1 → M2/M3 → M4/M5 → M6 → M7 → M8 → M9 → M10 → M11`
 
-M2, M3, M4 and M5 intentionally overlap. Documentation and traceability under M11 run continuously rather than waiting until the end.
+M2–M5 overlap deliberately. M11 runs continuously.
+
+## Current design decisions
+
+### Fleet
+- Robot A: new fiberglass hull.
+- Robot B: inherited cleaning ASV, baseline before upgrade.
+- Robot C: repurposed legacy ASV.
+- Robot D: optional.
+
+### Navigation/control
+- GNSS + IMU + external compass.
+- Low-level control stack remains a decision gate: ArduPilot Boat/Pixhawk-class vs custom STM32; PX4 considered only if marine support justifies it.
+- Pi/SBC is not required to be Pi 5; selection is based on workload/latency/thermal performance.
+
+### Perception
+- FloW image-only YOLO baseline.
+- ToF for close docking/clearance.
+- 2D LiDAR conditional by role/budget.
+- No funded radar baseline.
+
+### Fleet communications and coordination
+- STM32 ↔ SX1262 LoRa peer link.
+- Compact fleet packets only; raw images/point clouds remain onboard.
+- Decentralized fleet agent + CBBA-style assignment.
+- Distributed dock token and task leases.
+- Optional operator laptop for monitoring/configuration only.
+
+### Mechanical mission systems
+- Floating-waste collector and Pontederia subsystem are distinct.
+- Intact Pontederia pickup preferred; cutting-assisted mode conditional.
+- Cutter/feed motor sized from measured force/torque/duty.
+- Dock/unloading is a first-class subsystem.
+
+### Simulation
+- SolidWorks + ANSYS Fluent/Mechanical.
+- MATLAB/Simulink + MSS marine model.
+- ROS 2 Jazzy + Gazebo Harmonic + VRX + ArduPilot SITL where selected.
+- Current/wind disturbance estimation validated against known simulation disturbance and physical logs.
+
+## Budget baseline
+
+See `PROCUREMENT_BASELINE.md`. The EGP 40,000 request is a fleet-wide ceiling allocation, not a best-in-class shopping list.
 
 ## Primary responsibility
 
-- **Aiham:** electrical, control, embedded, autopilot/navigation, power, cutter electrical integration, system integration.
-- **Omar:** mechanical, hull/structure, collection, cutter mechanics, fabrication.
-- **Both:** requirements, ROS 2/high-level software, Fleet Manager, perception integration, tests, evidence, procurement, report and defence.
+- **Aiham:** electrical, embedded, power, propulsion sizing/control, custom PCB, navigation/control, sensors/compute, LoRa, simulation/control integration.
+- **Omar:** fiberglass/hull/structure, hydrostatics, collector/Pontederia mechanics, dock mechanics, fabrication.
+- **Both:** ROS 2, decentralized fleet software, perception integration, system testing, procurement decisions, evidence and final delivery.
 
 ## Gate discipline
 
-A milestone is complete only when its parent issue can be closed with:
-
-- all required sub-issues complete or explicitly dispositioned;
-- acceptance criteria met;
-- evidence linked;
-- unresolved failures/risks documented;
-- downstream assumptions updated;
-- no hidden physical action or unrecorded design change.
+A parent milestone closes only when required sub-issues are complete/dispositioned, acceptance evidence exists, failures/risks are explicit, and downstream assumptions are updated.

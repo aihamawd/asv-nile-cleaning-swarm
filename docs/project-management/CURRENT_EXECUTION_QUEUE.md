@@ -1,22 +1,48 @@
 # Current Execution Queue
 
-**Baseline date:** 8 September 2026
+**Architecture rebaseline:** 28 September 2026  
+**Current state:** architecture freeze + pre-build engineering.
 
-The project is in **M1 — Requirements & Legacy Vehicle Characterisation**. Do not jump into final CAD, propulsion purchasing, cutter design freeze or fleet algorithms before the relevant M1 evidence exists.
+The project is still closing M1 evidence while selected M2–M5 design activities proceed in parallel where they do not depend on unknown legacy measurements.
 
-## Now
+## Execute now
 
-1. **#14 — M1.1 [Both] Recover legacy assets and complete handover inventory**
-2. **#15 — M1.2 [Omar] Mechanical/CAD baseline and hull integrity audit**
-3. **#16 — M1.3 [Aiham] Electrical, control and software legacy baseline audit**
+1. **#14 — M1.1** Recover legacy assets and complete handover inventory.
+2. **#15 — M1.2** Mechanical/CAD/hull integrity audit.
+3. **#16 — M1.3** Electrical/control/software/compute/sensor legacy audit.
+4. **#17 — M1.4** Restore/run at least one legacy platform as-is and record measured baseline.
+5. **#20 — M2.2** Hydrostatics, buoyancy, payload, CG/CB, trim and stability.
+6. **#25 — M3.2** Propulsion thrust/current sizing and bench characterisation.
+7. **#29 — M4.1** Low-level control-stack trade study: ArduPilot Boat/Pixhawk-class vs custom STM32; PX4 only if justified.
+8. **#35/#36** Collection/Pontederia requirements and mechanism trade study.
+9. **#33** Establish MSS + VRX/Gazebo current/wind simulation baseline.
+10. **#26/#27** Prepare FloW image-only YOLO pipeline and role-appropriate camera/ToF/LiDAR architecture.
 
-M1.2 and M1.3 may proceed in parallel as artifact recovery allows.
+## Next gate
 
-## Next
+Close **M1** only after the actual fleet inventory, baseline measurements, risks and open assumptions are explicit.
 
-4. **#17 — M1.4 [Both] Restore and run legacy platform as-is; record measured baseline**
-5. **#18 — M1.5 [Both] Freeze initial requirements, acceptance metrics and project risk assumptions**
+Immediately after that:
+
+- freeze Robot A fiberglass hull envelope from hydrostatics;
+- freeze propulsion purchase only after thrust/current evidence;
+- freeze Pi/STM32/SX1262 interfaces;
+- prototype collector/Pontederia handling and dock/unloading hardware;
+- start controlled single-ASV navigation/perception testing.
+
+## Do not freeze yet
+
+Do not lock the following without evidence:
+
+- exact Robot A dimensions before buoyancy/stability;
+- exact thruster/motor before loaded thrust/current sizing;
+- cutter topology/motor before contained cutting/feed tests;
+- mandatory Pi 5 or identical SBC across the fleet;
+- fleet-wide LiDAR;
+- radar purchase;
+- a mandatory shore Fleet Manager;
+- custom PCB high-current power stage before interfaces/loads are proven.
 
 ## Gate rule
 
-M2–M5 planning may be explored, but no design freeze or major physical commitment should bypass M1. The first decision point is evidence from the inherited fleet, not assumptions about what the previous vehicles contain or what the final new vehicle must look like.
+Exploration may run in parallel, but fabrication/purchase/field commitments must reference calculations, tests or an approved design decision.

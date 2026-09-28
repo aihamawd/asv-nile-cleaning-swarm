@@ -1,68 +1,124 @@
 # SYS-001 — Baseline System Architecture
 
-**Status:** Baseline, subject to evidence-driven refinement
+**Status:** Rebaselined 2026-09-28; evidence-driven refinement remains allowed.
 
-## System context
+## 1. System context
 
-The project implements a mixed fleet of 3–4 physical autonomous surface vehicles for Nile surface cleaning. One vehicle is a new build; 2–3 vehicles are inherited platforms restored and retrofitted where feasible.
+Mixed fleet of 3–4 physical ASVs for Nile floating-waste collection and water-hyacinth (*Pontederia crassipes*) handling.
 
-## Vehicle architecture
+- Robot A: new fiberglass build.
+- Robot B: inherited cleaning ASV.
+- Robot C: repurposed legacy ASV.
+- Robot D: optional.
 
-Each vehicle is expected to separate functions across three logical layers where hardware permits:
+## 2. Per-vehicle architecture
 
-1. **Marine autopilot** — GNSS/IMU state estimation, heading/speed control, differential thrust, geofence, Hold/RTL, basic failsafes, RC/manual override.
-2. **ROS 2 onboard computer** — mission state machine, perception, coverage/fleet client, logging, higher-level guidance and integration.
-3. **Auxiliary embedded I/O** — collection/load sensing, leak sensing, cutter/gate interlocks, current/jam sensing and other local health I/O where required.
+Where practical, each main ASV uses two processing layers:
 
-The exact electronics implementation may differ between legacy and new-build vehicles, provided the external fleet interface and safety behavior remain compatible.
+### High-level Linux SBC
 
-## Fleet architecture
+Role-sized compute selected by measured workload rather than a mandatory Pi 5.
 
-The shore Fleet Manager owns mission-level coordination only:
+Responsibilities:
 
-- geofenced mission definition;
-- area decomposition;
-- shared task pool;
-- vehicle status monitoring;
-- task assignment/reassignment;
-- mission progress and logs;
-- shore/service handoff arbitration where required.
+- ROS 2 Jazzy;
+- camera perception and FloW-trained YOLO where needed;
+- mission state machine;
+- coverage/local map;
+- decentralized fleet agent / CBBA;
+- advisory ML;
+- MCAP logging;
+- optional Wi-Fi maintenance/offload.
 
-It must not continuously command propulsion.
+### Low-level STM32/autopilot-class controller
 
-## Common vehicle state
+Responsibilities:
 
-The common fleet interface should be able to represent at minimum:
+- GNSS + IMU + external compass state estimation;
+- heading/speed and differential-thrust control;
+- actuator outputs and auxiliary I/O;
+- hard geofence/failsafe/interlock behavior;
+- RC/manual override;
+- leak/current/load/jam monitoring;
+- direct SX1262 LoRa peer link.
 
-- vehicle ID and timestamp;
-- pose/navigation state;
-- velocity/speed;
-- battery/energy state;
-- collection load/fill state where available;
-- health/fault state;
-- communication freshness;
-- current task and progress;
-- operating mode.
+The low-level software stack is not frozen: ArduPilot Boat/Pixhawk-class, custom STM32 or another justified marine-capable approach must pass a documented trade study.
 
-## Communication-loss principle
+## 3. Fleet architecture
 
-Loss of shore communication does not remove onboard local autonomy. The vehicle should enter documented degraded behavior using onboard safety and mission logic; stale fleet tasks are only released after the defined heartbeat/timeout policy.
+No mandatory shore Fleet Manager.
 
-## Safety hierarchy
+Each vehicle maintains a local fleet/mission state and exchanges compact peer messages:
 
-Local physical isolation and onboard failsafes take priority over remote software commands. RC/manual intervention has higher authority than mission-level autonomy.
+- ID/time/pose/velocity/heading;
+- capability vector;
+- battery/energy reserve;
+- payload/full state;
+- health/fault;
+- current task/progress;
+- bid/ownership/lease epoch;
+- dock token/service state;
+- short intent/trajectory.
 
-## Open architecture decisions
+Baseline allocation is decentralized CBBA-style consensus. Temporary local leadership is allowed for a coalition/dock sequence but is not a permanent master.
 
-The following are deliberately not frozen by SYS-001:
+## 4. Communication
 
-- exact autopilot model;
-- exact SBC/MCU hardware;
-- communication radio/transport;
-- ROS 2 package decomposition;
-- task-allocation algorithm;
-- cutter topology;
-- propulsion hardware;
-- advanced sensing/RTK requirements.
+Baseline: SX1262 LoRa transceiver connected directly to STM32 over SPI.
 
-These require requirements, tests, calculations, or design decisions before freeze.
+LoRa carries compact state/task/fault traffic only. Raw images, LiDAR and MCAP stay onboard and are offloaded separately.
+
+Communication partition must not remove local safety. Stale ownership is released only under explicit lease/timeout policy.
+
+## 5. Perception
+
+- RGB camera + FloW image dataset + YOLO baseline.
+- No new training dataset required.
+- ToF for final docking/close clearance.
+- 2D LiDAR conditional by role and budget.
+- Radar excluded from funded baseline.
+
+## 6. Payload architecture
+
+### Floating waste
+Guide/funnel → capture/feed → retention/bin → fill/load state → unload.
+
+### Pontederia
+Intact pickup preferred. Cutting-assisted handling is conditional on dense-mat tests. Design includes feed/retention, anti-wrap, current/jam detection and escaped-fragment measurement.
+
+### Dock/service
+GNSS coarse approach → marker pose → ToF final range → mechanical guides/contact → unload → optional charge → token release.
+
+## 7. Modelling/simulation
+
+- SolidWorks / Motion;
+- ANSYS Fluent / Mechanical;
+- MATLAB/Simulink + MSS;
+- ROS 2 + Gazebo Harmonic + VRX;
+- ArduPilot SITL where selected;
+- QGIS/Sentinel mission mapping;
+- Foxglove/PlotJuggler/MCAP evidence.
+
+Known simulated current/wind is used to evaluate estimators; real logs validate generalization.
+
+## 8. Safety hierarchy
+
+Physical isolation / RC override / local interlock > low-level control > high-level mission > fleet suggestion > advisory ML.
+
+No ML or remote fleet agent may weaken local hard limits.
+
+## 9. Open design decisions
+
+Still evidence-driven:
+
+- final Robot A dimensions;
+- exact fiberglass layup;
+- exact propulsion hardware;
+- exact battery sizes per boat;
+- low-level autopilot/controller platform;
+- exact SBC by role;
+- final collector/cutter/feed topology;
+- final dock/unloader;
+- whether any boat justifies LiDAR;
+- custom PCB partitioning and revision;
+- advanced ML functions.
