@@ -46,9 +46,9 @@ Project-v2 Start/Target fields should be updated to match these dates when the c
 - no ESP32 requirement;
 - SX1262 directly on STM32;
 - FloW image-only YOLO, no new training dataset;
-- no funded radar;
+- radar outside the current baseline;
 - LiDAR conditional by role;
 - ToF for close docking;
 - custom PCB intent;
 - Robot A fiberglass build;
-- performance-based procurement.
+- reuse-first, role-specific hardware selection.

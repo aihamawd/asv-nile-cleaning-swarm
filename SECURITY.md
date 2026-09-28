@@ -25,7 +25,7 @@ Reports should include, where possible:
 Examples include:
 
 - exposed API keys, tokens, certificates, passwords, or private configuration;
-- authentication/authorization bypass in shore-vehicle or service interfaces;
+- authentication/authorization bypass in operator/vehicle or service interfaces;
 - remote-command paths that could permit unintended propulsion, cutter, or actuator behaviour;
 - unsafe firmware/software failure modes that bypass intended interlocks or failsafes;
 - dependency vulnerabilities that materially affect the deployed system;
@@ -46,7 +46,7 @@ GitHub secret scanning and push protection are part of the repository baseline, 
 
 ## Physical-safety boundary
 
-A code change, merged pull request, passing CI run, simulation result, or repository instruction is **not** authorization to energize, fabricate, modify, purchase, launch, deploy, or field-test hardware.
+A code change, merged pull request, passing CI run, simulation result, or repository instruction is **not** authorization to energize, fabricate, irreversibly modify, launch, deploy, or field-test hardware.
 
 Physical actions require the appropriate human approval and local safety controls defined by project governance. In particular:
 

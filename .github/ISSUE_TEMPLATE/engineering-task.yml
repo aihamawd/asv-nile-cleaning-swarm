@@ -43,7 +43,7 @@ body:
     attributes:
       label: Physical-action gate
       options:
-        - label: This task requires fabrication, energized hardware work, irreversible modification, procurement commitment, or field deployment and therefore needs explicit human approval before that action.
+        - label: This task requires fabrication, energized hardware work, irreversible modification, or field deployment and therefore needs explicit human approval before that action.
   - type: textarea
     id: evidence
     attributes:

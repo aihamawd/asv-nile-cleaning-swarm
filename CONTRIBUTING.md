@@ -27,7 +27,7 @@ A pull request should state:
 - verification performed;
 - evidence paths/IDs;
 - known limitations;
-- whether hardware, safety, procurement, or field-test approval is required.
+- whether hardware, safety, or field-test approval is required.
 
 The repository-readiness CI check must pass before normal merge. Collaborator-authored changes to `main` require pull-request review; the repository administrator retains bypass capability for recovery/emergency use and should document any material bypass.
 
@@ -63,4 +63,4 @@ Each significant experiment/test should record:
 
 ## Safety
 
-Never energize, fabricate, modify, purchase, or deploy hardware solely because a repository change says to do so. Physical actions require the appropriate human approval and local safety controls.
+Never energize, fabricate, irreversibly modify, or deploy hardware solely because a repository change says to do so. Physical actions require the appropriate human approval and local safety controls.

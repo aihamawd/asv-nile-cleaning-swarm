@@ -25,7 +25,7 @@ Close **M1** only after the actual fleet inventory, baseline measurements, risks
 Immediately after that:
 
 - freeze Robot A fiberglass hull envelope from hydrostatics;
-- freeze propulsion purchase only after thrust/current evidence;
+- freeze propulsion hardware only after thrust/current evidence;
 - freeze Pi/STM32/SX1262 interfaces;
 - prototype collector/Pontederia handling and dock/unloading hardware;
 - start controlled single-ASV navigation/perception testing.
@@ -39,10 +39,10 @@ Do not lock the following without evidence:
 - cutter topology/motor before contained cutting/feed tests;
 - mandatory Pi 5 or identical SBC across the fleet;
 - fleet-wide LiDAR;
-- radar purchase;
+- radar;
 - a mandatory shore Fleet Manager;
 - custom PCB high-current power stage before interfaces/loads are proven.
 
 ## Gate rule
 
-Exploration may run in parallel, but fabrication/purchase/field commitments must reference calculations, tests or an approved design decision.
+Exploration may run in parallel, but fabrication and field commitments must reference calculations, tests or an approved design decision.

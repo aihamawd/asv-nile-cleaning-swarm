@@ -7,15 +7,15 @@
 ## Execution rules
 
 1. GitHub Issues are executable work; parent issues are milestone gates.
-2. Evidence precedes design freeze, purchase and fabrication release.
+2. Evidence precedes design freeze and fabrication release.
 3. Simulation/bench work may proceed autonomously; physical/irreversible work remains human-supervised.
 4. Local navigation, hard safety, geofence, RC override and actuator interlocks remain onboard.
 5. Fleet coordination is **decentralized by baseline**. No mandatory shore Fleet Manager.
 6. Each main ASV uses a two-controller concept where feasible: role-sized Linux SBC for ROS 2/perception/mission + STM32/autopilot-class controller for real-time control/safety/I/O.
 7. SX1262 LoRa connects directly to STM32; no ESP32 is required.
 8. FloW image data is reused for YOLO; no new training dataset is planned.
-9. Radar is outside the funded baseline.
-10. Procurement is performance-based, role-specific and reuse-first.
+9. Radar is outside the current baseline.
+10. Hardware selection is reuse-first, role-specific and evidence-driven.
 
 ## Milestone gates
 
@@ -55,8 +55,8 @@ M2–M5 overlap deliberately. M11 runs continuously.
 ### Perception
 - FloW image-only YOLO baseline.
 - ToF for close docking/clearance.
-- 2D LiDAR conditional by role/budget.
-- No funded radar baseline.
+- 2D LiDAR conditional by role and demonstrated need.
+- Radar outside the current baseline.
 
 ### Fleet communications and coordination
 - STM32 ↔ SX1262 LoRa peer link.
@@ -77,15 +77,11 @@ M2–M5 overlap deliberately. M11 runs continuously.
 - ROS 2 Jazzy + Gazebo Harmonic + VRX + ArduPilot SITL where selected.
 - Current/wind disturbance estimation validated against known simulation disturbance and physical logs.
 
-## Budget baseline
-
-See `PROCUREMENT_BASELINE.md`. The EGP 40,000 request is a fleet-wide ceiling allocation, not a best-in-class shopping list.
-
 ## Primary responsibility
 
 - **Aiham:** electrical, embedded, power, propulsion sizing/control, custom PCB, navigation/control, sensors/compute, LoRa, simulation/control integration.
 - **Omar:** fiberglass/hull/structure, hydrostatics, collector/Pontederia mechanics, dock mechanics, fabrication.
-- **Both:** ROS 2, decentralized fleet software, perception integration, system testing, procurement decisions, evidence and final delivery.
+- **Both:** ROS 2, decentralized fleet software, perception integration, system testing, evidence and final delivery.
 
 ## Gate discipline
 

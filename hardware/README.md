@@ -15,7 +15,7 @@ New fiberglass ASV. Before fabrication freeze record:
 
 ## Propulsion
 
-Select from loaded resistance/current requirements and measured thrust-current maps. Premium marine thrusters are not mandatory if a cheaper solution passes the acceptance envelope.
+Select from loaded resistance/current requirements and measured thrust-current maps. The selected solution must satisfy the required mission performance, steering authority, thermal behavior, serviceability and debris-resistance criteria.
 
 ## Payloads
 
@@ -29,5 +29,3 @@ Maintain separate design records for:
 ## Electronics
 
 Custom PCB intent: STM32/SX1262/sensor/power-monitor/auxiliary interface and protection. Keep high-current propulsion power stages separate until explicitly justified.
-
-See `docs/project-management/PROCUREMENT_BASELINE.md`.
