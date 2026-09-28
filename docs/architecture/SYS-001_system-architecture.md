@@ -75,8 +75,8 @@ Communication partition must not remove local safety. Stale ownership is release
 - RGB camera + FloW image dataset + YOLO baseline.
 - No new training dataset required.
 - ToF for final docking/close clearance.
-- 2D LiDAR conditional by role and budget.
-- Radar excluded from funded baseline.
+- 2D LiDAR conditional by role and demonstrated need.
+- Radar excluded from the current baseline.
 
 ## 6. Payload architecture
 

@@ -10,23 +10,21 @@ ASV-FYP/
 ├── 02_Requirements/
 ├── 03_Design/
 ├── 04_CAD/
-├── 05_Procurement/
-│   └── PUR-###/
-├── 06_Experiments/
+├── 05_Experiments/
 │   └── EXP-###/
-├── 07_Failures/
+├── 06_Failures/
 │   └── FAIL-###/
-├── 08_Photos_Video/
-├── 09_Raw_Data/
-├── 10_Supervisor/
-└── 11_Submissions/
+├── 07_Photos_Video/
+├── 08_Raw_Data/
+├── 09_Supervisor/
+└── 10_Submissions/
 ```
 
 ## Evidence-link rule
 
 Every material Drive artifact should be reachable from a GitHub engineering record through an `EVD-###` entry in `project-data/evidence-index.csv`.
 
-Prefer stable folder/file links and include the permanent project ID in the folder or filename. Avoid names such as `final2.xlsx`, `newdesign_final.step`, or `IMG_1234.mov` when the file is an engineering record.
+Prefer stable folder/file links and include the permanent project ID in the folder or filename.
 
 Recommended naming pattern:
 
@@ -36,8 +34,7 @@ Recommended naming pattern:
 
 - native CAD/CAE projects and large assemblies;
 - photos/video;
-- invoices, receipts and supplier quotations;
-- large datasheets or vendor packages when needed as evidence;
+- large datasheets or vendor packages when technically relevant;
 - ROS bags / MCAP;
 - large raw datasets;
 - signed/formal documents;

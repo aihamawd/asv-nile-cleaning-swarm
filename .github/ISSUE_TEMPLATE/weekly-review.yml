@@ -18,9 +18,9 @@ body:
     attributes:
       label: Failures / blockers / assumptions changed
   - type: textarea
-    id: schedule_cost
+    id: schedule
     attributes:
-      label: Schedule / cost variance requiring attention
+      label: Schedule variance requiring attention
   - type: textarea
     id: decisions
     attributes:

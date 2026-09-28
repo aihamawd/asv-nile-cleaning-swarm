@@ -47,24 +47,76 @@ The fleet is intentionally **heterogeneous**. Vehicles do not need identical hul
 7. establish first MSS and VRX/Gazebo current/wind simulation baselines;
 8. prepare the FloW image-only YOLO perception pipeline without creating a new training dataset.
 
-## Core architecture
+## System architecture
 
-### Per operational ASV
+```mermaid
+flowchart LR
+    HMI["Optional operator laptop\nmonitoring / configuration only"]
 
-**High-level computer (role-sized Linux SBC; Raspberry Pi family is one option, not a mandatory Pi 5):**
+    subgraph A["ASV A — new fiberglass build"]
+        A_PI["Role-sized Linux SBC\nROS 2 · perception · mission · CBBA · MCAP"]
+        A_STM["STM32 / marine autopilot\nGNSS · IMU · compass · control · failsafes"]
+        A_PAY["Collector / Pontederia / dock I/O"]
+        A_RF["SX1262 LoRa"]
+        A_PI <--> A_STM
+        A_STM --> A_PAY
+        A_STM <--> A_RF
+    end
+
+    subgraph B["ASV B — inherited cleaning platform"]
+        B_PI["Role-sized Linux SBC\nROS 2 · mission · perception as needed"]
+        B_STM["STM32 / marine autopilot\nlocal control · safety · health"]
+        B_PAY["Waste collector / service interfaces"]
+        B_RF["SX1262 LoRa"]
+        B_PI <--> B_STM
+        B_STM --> B_PAY
+        B_STM <--> B_RF
+    end
+
+    subgraph C["ASV C / optional D — legacy retrofit"]
+        C_PI["Role-sized Linux SBC\nrole-specific mission software"]
+        C_STM["STM32 / marine autopilot\nlocal autonomy · failsafes"]
+        C_PAY["Scout / collector / plant-support payload"]
+        C_RF["SX1262 LoRa"]
+        C_PI <--> C_STM
+        C_STM --> C_PAY
+        C_STM <--> C_RF
+    end
+
+    A_RF <--> |"peer fleet state / bids / task ownership"| B_RF
+    B_RF <--> |"peer fleet state / bids / task ownership"| C_RF
+    C_RF <--> |"peer fleet state / bids / task ownership"| A_RF
+
+    HMI -. "optional telemetry / diagnostics" .-> A_PI
+    HMI -. "optional telemetry / diagnostics" .-> B_PI
+    HMI -. "optional telemetry / diagnostics" .-> C_PI
+```
+
+The architecture is **decentralized by baseline**. There is no mandatory shore computer and no permanent fleet master. Each ASV maintains local autonomy and a replicated fleet/mission view.
+
+## Per operational ASV
+
+### High-level computer
+
+A role-sized Linux SBC handles:
 
 - ROS 2 Jazzy;
 - FloW-trained YOLO camera perception where needed;
 - mission state machine;
-- local map/coverage logic;
+- local map and coverage logic;
 - decentralized fleet agent and CBBA task bidding;
 - advisory ML/AI functions only after deterministic baselines;
-- rosbag2/MCAP logging and optional Wi-Fi maintenance/offload.
+- rosbag2/MCAP logging;
+- optional Wi-Fi maintenance and data offload.
 
-**Low-level real-time controller: STM32/autopilot-class controller:**
+A Raspberry Pi family board is one option; no specific Pi generation is mandatory.
+
+### Low-level real-time controller
+
+The STM32/autopilot-class layer handles:
 
 - GNSS + IMU + external compass state estimation;
-- heading/speed/differential-thrust control;
+- heading, speed and differential-thrust control;
 - geofence, Hold/RTL/return and stale-command failsafes;
 - RC/manual override and physical isolation path;
 - collector/cutter/dock auxiliary I/O and hard interlocks;
@@ -73,13 +125,11 @@ The fleet is intentionally **heterogeneous**. Vehicles do not need identical hul
 
 There is **no ESP32 requirement** in the baseline.
 
-### Decentralized fleet
-
-There is **no mandatory shore computer**. Each ASV maintains a local replicated mission/fleet view and exchanges compact peer messages over LoRa.
+## Decentralized fleet
 
 The baseline fleet logic includes:
 
-- robot identity/capability vector;
+- robot identity and capability vector;
 - heartbeat and health state;
 - pose, heading, speed and short intent;
 - battery reserve and payload/full state;
@@ -89,7 +139,7 @@ The baseline fleet logic includes:
 - unfinished-work recovery after bounded timeout/withdrawal;
 - distributed dock token and staging waypoints.
 
-An operator laptop may monitor/configure the fleet, but loss of that laptop is not a fleet-control failure.
+An operator laptop may monitor and configure the fleet, but loss of that laptop is not a fleet-control failure.
 
 ## Mission payloads
 
@@ -117,7 +167,7 @@ GNSS/compass coarse approach → AprilTag/ArUco relative alignment → ToF final
 - The project will **reuse FloW** rather than create a new training dataset.
 - **2D LiDAR** is conditional and role-specific for obstacle/dock geometry.
 - **ToF** is intended for close-range docking/clearance and must be characterized over water/sunlight.
-- **Radar is not in the funded baseline.** Radar fusion may only be revisited if suitable 77 GHz hardware is borrowed or becomes economically reasonable; cheap presence radar is not treated as a substitute.
+- **Radar is not in the current baseline.**
 
 ## Modelling, simulation and current/disturbance work
 
@@ -143,7 +193,7 @@ Deterministic control, interlocks, geofence, RC override and communication-loss 
 2. remaining-energy prediction;
 3. real-world dynamics residual learning;
 4. hotspot prediction;
-5. learned allocation-cost comparison;
+5. learned allocation comparison;
 6. health/fault scoring;
 7. debris-drift/intercept prediction;
 8. docking anomaly assistance;
@@ -151,27 +201,11 @@ Deterministic control, interlocks, geofence, RC override and communication-loss 
 
 A model is allowed to influence mission logic only if measured benefit justifies it.
 
-## Procurement philosophy
+## Hardware-selection philosophy
 
-The project is **performance-based and reuse-first**, not best-in-class-by-default.
+The project is **reuse-first, role-specific and evidence-driven**.
 
-Buy the lowest-cost component that demonstrably meets the mission, safety and reliability threshold. Reuse serviceable legacy hardware. Richer compute/sensing is concentrated on the vehicle that needs it.
-
-Current EGP 40,000 funding baseline:
-
-| Area | Ceiling |
-|---|---:|
-| Propulsion + motor control | EGP 9,000 |
-| Battery + protected power | EGP 5,000 |
-| Compute + navigation + sensing + LoRa | EGP 6,000 |
-| Robot A fiberglass hull + structural fabrication | EGP 5,500 |
-| Collector + Pontederia cutter/feed mechanisms | EGP 4,500 |
-| Custom PCB prototypes + waterproof electrical integration | EGP 4,000 |
-| Docking + unloading prototype | EGP 2,500 |
-| Testing, spares, transport and contingency | EGP 3,500 |
-| **Total** | **EGP 40,000** |
-
-These are **fleet-wide ceilings**, not automatic spend targets. Purchase follows measurement and reuse audit.
+Serviceable legacy hardware should be reused where it meets the engineering requirement. More capable compute or sensing is concentrated on vehicles that actually need it. Hardware is frozen from measured mission requirements, interface compatibility, reliability and test evidence rather than by defaulting every vehicle to the same configuration.
 
 ## Repository execution model
 
@@ -184,7 +218,6 @@ See:
 - [Gantt](docs/project-management/GANTT.md)
 - [System architecture](docs/architecture/SYS-001_system-architecture.md)
 - [Requirements baseline](docs/requirements/REQ-BASELINE.md)
-- [Procurement baseline](docs/project-management/PROCUREMENT_BASELINE.md)
 - [Operating architecture](docs/project-management/OPERATING_ARCHITECTURE.md)
 
 ## Milestone gates
@@ -207,7 +240,7 @@ See:
 
 - **Aiham:** electrical, power/protection, embedded, compute, custom PCB, navigation/control, propulsion electrical, sensing, communication, simulation/control integration.
 - **Omar:** mechanical, hull/fiberglass/structure, hydrostatics/stability, collection, Pontederia mechanics, cutter/feed, dock mechanics, fabrication.
-- **Both:** requirements, ROS 2 interfaces, decentralized fleet software, perception integration, procurement, validation, evidence and final academic delivery.
+- **Both:** requirements, ROS 2 interfaces, decentralized fleet software, perception integration, validation, evidence and final academic delivery.
 
 ## Safety boundary
 

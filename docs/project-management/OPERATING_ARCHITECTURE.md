@@ -20,7 +20,7 @@ The physical target is 3–4 heterogeneous ASVs:
 - Robot C repurposed legacy platform;
 - Robot D optional.
 
-Common interfaces are standardized; expensive hardware is not duplicated without need.
+Common interfaces are standardized; hardware is role-specific where appropriate.
 
 ## 3. Controller and communications baseline
 
@@ -52,18 +52,17 @@ The operator laptop is an optional HMI/diagnostic station.
 
 ## 5. Permanent IDs
 
-`REQ` · `SYS` · `ADR` · `MECH` · `ELEC` · `EMB` · `SW` · `NAV` · `VIS` · `FLT` · `PUR` · `BOM` · `EXP` · `TEST` · `FAIL` · `RCA` · `CHG` · `RISK` · `SAFE` · `MIN` · `WEEK` · `EVD`.
+`REQ` · `SYS` · `ADR` · `MECH` · `ELEC` · `EMB` · `SW` · `NAV` · `VIS` · `FLT` · `BOM` · `EXP` · `TEST` · `FAIL` · `RCA` · `CHG` · `RISK` · `SAFE` · `MIN` · `WEEK` · `EVD`.
 
 ## 6. Development principles
 
 1. Evidence before freeze.
-2. Performance-per-EGP before premium branding.
-3. Reuse before replacement.
-4. Role-specific hardware before fleet-wide duplication.
-5. Deterministic safety before ML.
-6. Physical validation before simulation-only claims.
-7. Current/wind/disturbance must be measured or explicitly simulated with known ground truth.
-8. Failures remain evidence.
+2. Reuse before replacement.
+3. Role-specific hardware before fleet-wide duplication.
+4. Deterministic safety before ML.
+5. Physical validation before simulation-only claims.
+6. Current/wind/disturbance must be measured or explicitly simulated with known ground truth.
+7. Failures remain evidence.
 
 ## 7. Pull-request rule
 
@@ -73,7 +72,6 @@ A merged software change never authorizes physical actuation.
 
 ## 8. Event capture
 
-- purchase → `PUR-###` + cost register + evidence;
 - experiment/test → `EXP/TEST-###` + raw data + conclusion;
 - failure → `FAIL-###` + containment + recurrence check;
 - engineering change → `CHG-###` + re-verification;
@@ -86,8 +84,6 @@ Under `project-data/`:
 - `requirements-traceability.csv`;
 - `evidence-index.csv`;
 - `gantt.csv`;
-- `cost-register.csv`;
-- `funding-baseline.csv`;
 - `failure-register.csv`;
 - `experiment-index.csv`.
 
@@ -109,12 +105,12 @@ Advisory ML is permitted only with a deterministic baseline and measured benefit
 
 ## 13. Hardware authority
 
-Simulation, analysis and repository edits can proceed without physical actuation. Fabrication release, flashing/energizing hardware, propulsion/cutter operation, purchase commitments and river deployment require human supervision/approval.
+Simulation, analysis and repository edits can proceed without physical actuation. Fabrication release, flashing/energizing hardware, propulsion/cutter operation and river deployment require human supervision/approval.
 
 ## 14. Weekly operating loop
 
 - Start: current queue + blockers.
-- During work: capture purchases/tests/failures/changes.
+- During work: capture tests/failures/changes.
 - End of week: exception audit.
 - Before supervisor meeting: evidence-backed progress brief.
 - Before viva: final claims-to-evidence audit.
