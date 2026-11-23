@@ -1,1 +1,2 @@
 evidence_id,source_id,date,title,path,configuration_revision,supports_claim,limitations,status
+EVD-001,EXP-001,2026-11-21,Boat 1 inherited hull and RC hardware photo set,PENDING_VAULT_UPLOAD: IMG_1381.jpeg; IMG_1170.jpeg; IMG_1197.jpeg; IMG_1196.jpeg; IMG_1194.jpeg,Inherited prototype; latest Codex firmware not verified,Visual hull frame and inherited electronics configuration only,Original photos supplied in conversation; capture date unknown; no durable vault URL; functional test performance not established,PENDING
